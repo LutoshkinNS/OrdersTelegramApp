@@ -1,35 +1,86 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "./App.css";
+import {useEffect, useState} from "react";
+import {Button} from "./components/Button/Button";
+import {Input} from "./components/Input/Input";
 
-function App() {
-  const [count, setCount] = useState(0)
+const tg = window.Telegram.WebApp;
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+interface Deal {
+    description: string;
+    label: string;
+    stage: string;
+    data: unknown;
+    time_period: {
+        endDate: string;
+        startDate: string;
+    }
 }
 
-export default App
+
+function App() {
+    const [deals, setDeals] = useState<Deal[]>();
+    const [order, setOrder] = useState<Deal>();
+    const [input, setInput] = useState<string>();
+
+    useEffect(() => {
+        tg.ready();
+    }, []);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch('https://huge-apes-joke.loca.lt/api/deals/tg?id=1');
+                const data = await response.json();
+                console.log(data);
+                setDeals(data);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    const fetchOrder = async (label: string) => {
+        try {
+            const response = await fetch(`https://huge-apes-joke.loca.lt/api/deals/label?id=1&label=${label}`);
+            const data = await response.json();
+            console.log(data);
+            setOrder(data);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    };
+
+
+    console.log(deals)
+
+    return (
+        <>
+
+            <main className="p-8 flex flex-col justify-start h-dvh">
+
+
+                <div className="flex flex-row gap-2">
+                    {deals?.map((deal) => {
+                        return (
+                            <h3>{deal.label}</h3>
+                        )
+                    })}
+                </div>
+
+                <Input type="text" placeholder="Номер посылки" onInput={(e) => setInput(e.target.value)}/>
+
+                <Button className="mb-4" onClick={() => fetchOrder(input)}>Отследить посылку</Button>
+
+                <h3>{order?.label}</h3>
+                <p>{order?.description}</p>
+                <p>{order?.stage}</p>
+                <p>{order?.time_period.startDate}</p>
+                <p>{order?.time_period.endDate}</p>
+            </main>
+        </>
+    )
+}
+
+export default App;
