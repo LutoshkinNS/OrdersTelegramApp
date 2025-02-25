@@ -33,7 +33,7 @@ export const Order = () => {
                 {/*    {order ? JSON.stringify(order, null, 2) : 'Not data'}*/}
                 {/*</pre>*/}
                 <h2 className="text-4xl font-bold mb-6">{trackId}</h2>
-                <p className="text-2xl font-medium mb-4">Константинов Константин Константинович</p>
+                <p className="text-2xl font-medium mb-4">Константин Константинович К.</p>
                 <div className="mb-6">
                     <ProductAvatar className="float-left mr-4"/>
                     <div className="">
