@@ -1,11 +1,16 @@
-import "./App.css";
 import {useEffect, useState} from "react";
-import {Button} from "./components/Button/Button";
-import {Input} from "./components/Input/Input";
+import "./App.css";
+import {Input} from "./shared/components/Input/Input.tsx";
+import {Button} from "./shared/components/Button/Button.tsx";
+import {Logo} from "./shared/components/Logo/Logo.tsx";
+import {mockData} from "./mock.ts";
+import {useNavigate} from "react-router";
 
-const tg = window.Telegram.WebApp;
+export const url = "https://new-queens-return.loca.lt"
 
-interface Deal {
+export const tg = window.Telegram.WebApp;
+
+export interface OrderType {
     description: string;
     label: string;
     stage: string;
@@ -17,70 +22,47 @@ interface Deal {
 }
 
 
-function App() {
-    const [deals, setDeals] = useState<Deal[]>();
-    const [order, setOrder] = useState<Deal>();
-    const [input, setInput] = useState<string>();
+export default function App() {
+    const [inputValue, setInputValue] = useState<string>('KR-22');
+    const [order, setOrder] = useState<OrderType | undefined>()
+
+    const navigate = useNavigate();
+
+    console.log(order)
 
     useEffect(() => {
         tg.ready();
     }, []);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await fetch('https://huge-apes-joke.loca.lt/api/deals/tg?id=1');
-                const data = await response.json();
-                console.log(data);
-                setDeals(data);
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        };
-
-        fetchData();
-    }, []);
-
-    const fetchOrder = async (label: string) => {
-        try {
-            const response = await fetch(`https://huge-apes-joke.loca.lt/api/deals/label?id=1&label=${label}`);
-            const data = await response.json();
-            console.log(data);
-            setOrder(data);
-        } catch (error) {
-            console.error('Error fetching data:', error);
-        }
-    };
-
-
-    console.log(deals)
+    const handleSubmit = () => {
+        navigate(`/order/${inputValue}`)
+        // const findOrder = mockData.find((item) => item.label === inputValue);
+        // setOrder(findOrder);
+        // setInputValue('');
+        // fetchOrder(inputValue).then(r => console.log(r));
+    }
 
     return (
-        <>
+        <div className="flex flex-col h-dvh">
+            <header
+                className="flex max-w-4xl px-6 py-4 border border-transparent">
+                <Logo/>
+            </header>
+            <main className="grow-1 flex flex-col h-full p-6 overflow-scroll">
+                {/*{*/}
+                {/*    tg.initDataUnsafe.user?.id*/}
+                {/*}*/}
 
-            <main className="p-8 flex flex-col justify-start h-dvh">
-
-
-                <div className="flex flex-row gap-2">
-                    {deals?.map((deal) => {
-                        return (
-                            <h3>{deal.label}</h3>
-                        )
-                    })}
-                </div>
-
-                <Input type="text" placeholder="Номер посылки" onInput={(e) => setInput(e.target.value)}/>
-
-                <Button className="mb-4" onClick={() => fetchOrder(input)}>Отследить посылку</Button>
-
-                <h3>{order?.label}</h3>
-                <p>{order?.description}</p>
-                <p>{order?.stage}</p>
-                <p>{order?.time_period.startDate}</p>
-                <p>{order?.time_period.endDate}</p>
+                <Input className="mb-6 text-2xl" type="text" inputMode="text" placeholder="Номер заказа"
+                       value={inputValue}
+                       onInput={(e) => setInputValue(e.target.value)} autoFocus={true}/>
+                <Button className="mb-4" onClick={handleSubmit}>Отследить посылку</Button>
+                <p className="text-center text-gray-700 text-xl">Нажимая кнопку, вы соглашаетесь с обработкой
+                    персональных
+                    данных и
+                    политикой
+                    конфиденциальности</p>
             </main>
-        </>
-    )
+        </div>
+    );
 }
-
-export default App;

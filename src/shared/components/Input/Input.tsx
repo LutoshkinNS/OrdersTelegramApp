@@ -10,7 +10,7 @@ export function Input(props: InputProps) {
     return (
         <input
             className={clsx(
-                "w-full px-5 py-5 bg-gray text-2xl font-medium text-gray-950 border-none rounded-xl focus:outline-none focus:border-orange-600 transition-colors",
+                "w-full px-5 py-5 bg-gray font-medium text-gray-950 border-none rounded-xl focus:outline-none focus:border-orange-600 transition-colors",
                 className
             )}
             {...otherProps}
