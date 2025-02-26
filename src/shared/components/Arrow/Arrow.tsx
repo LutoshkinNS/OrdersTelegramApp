@@ -10,6 +10,6 @@ export const Arrow = (props: ArrowProps) => {
     const {alt, className} = props
 
     return (
-        <img className={clsx('transform rotate-180', className)} src={ArrowSvg} alt={alt}/>
+        <img className={clsx('transform rotate-180 cursor-pointer', className)} src={ArrowSvg} alt={alt}/>
     );
 };

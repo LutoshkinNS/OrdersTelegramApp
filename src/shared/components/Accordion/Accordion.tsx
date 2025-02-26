@@ -28,7 +28,8 @@ export const Accordion = (props: AccordionProps) => {
     const {children, title, className, open, onToggle} = props
     return (
         <div
-            className={clsx('p-4 rounded-xl bg-gray font-medium text-gray-950', className)} onClick={onToggle}>
+            className={clsx('p-4 rounded-xl bg-gray font-medium text-gray-950 cursor-pointer', className)}
+            onClick={onToggle}>
             <div className="flex flex-row justify-between items-center">
                 <span>{title}</span>
                 <ArrowIcon direction={open ? "up" : "down"}/>
