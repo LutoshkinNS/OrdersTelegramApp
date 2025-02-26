@@ -43,7 +43,7 @@ export default function App() {
     }
 
     return (
-        <div className="flex flex-col h-dvh">
+        <div className="font-display flex flex-col h-dvh">
             <header
                 className="flex max-w-4xl px-6 py-4 border border-transparent">
                 <Logo/>
