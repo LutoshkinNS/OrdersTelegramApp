@@ -43,12 +43,12 @@ export default function App() {
     }
 
     return (
-        <div className="font-display flex flex-col h-dvh">
+        <>
             <header
-                className="flex max-w-4xl px-6 py-4 border border-transparent">
+                className="max-w-4xl px-6 py-4 border border-transparent">
                 <Logo/>
             </header>
-            <main className="grow-1 flex flex-col h-full p-6 overflow-scroll">
+            <main className="p-6">
                 {/*{*/}
                 {/*    tg.initDataUnsafe.user?.id*/}
                 {/*}*/}
@@ -63,6 +63,6 @@ export default function App() {
                     политикой
                     конфиденциальности</p>
             </main>
-        </div>
+        </>
     );
 }
