@@ -39,18 +39,23 @@ type MainProps = {
 export default function Main(props: MainProps) {
   const { tg, setOrder } = props;
   const [inputValue, setInputValue] = useState<string>("АТ0758");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const navigate = useNavigate();
 
   const handleSubmit = async () => {
     if (inputValue !== "") {
-      const order = await fetchOrder(inputValue);
-
-      setOrder(order);
-      navigate(`/order/${inputValue}`);
+      try {
+        setIsLoading(true);
+        const order = await fetchOrder(inputValue);
+        setOrder(order);
+        navigate(`/order/${inputValue}`);
+      } catch (error) {
+        console.error('Error fetching order:', error);
+      } finally {
+        setIsLoading(false);
+      }
     }
-
-    // setOrder(mockData);
   };
 
   return (
@@ -68,8 +73,8 @@ export default function Main(props: MainProps) {
           onInput={(e) => setInputValue(e.target.value)}
           autoFocus={true}
         />
-        <Button className="mb-4" onClick={handleSubmit}>
-          Отследить посылку
+        <Button className="mb-4" onClick={handleSubmit} disabled={isLoading}>
+          {isLoading ? "Загрузка..." : "Отследить посылку"}
         </Button>
         <p className="text-center text-secondary-text dark:text-secondary-text-dark text-l">
           Нажимая кнопку, вы соглашаетесь с обработкой персональных данных и
