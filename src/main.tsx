@@ -5,12 +5,14 @@ import App from "./App.tsx";
 import {Order} from "./Order.tsx";
 import {Layout} from "./shared/components/Layout/Layout.tsx";
 
+export const tg = window.Telegram.WebApp;
+
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
         <BrowserRouter>
             <Routes>
-                <Route element={<Layout/>}>
-                    <Route path="/" element={<App/>}/>
+                <Route element={<Layout themeMode={tg.colorScheme}/>}>
+                    <Route path="/" element={<App tg={tg}/>}/>
                     <Route path="/order/:trackId" element={<Order/>}/>
                 </Route>
             </Routes>

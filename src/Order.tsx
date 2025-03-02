@@ -15,46 +15,62 @@ export const Order = () => {
     useEffect(() => {
         if (trackId) {
             // fetchOrder(trackId).then(r => setOrder(r));
-            const findOrder = mockData.find((item) => item.label === trackId);
-            setOrder(findOrder);
+            setOrder(mockData);
         }
     }, [trackId]);
 
     return (
-        <div className="flex flex-col h-dvh">
+        <>
             <header
-                className="flex max-w-4xl px-6 py-4 border border-transparent">
+                className="max-w-4xl px-6 py-4 border border-transparent">
                 <NavLink to="/">
                     <Arrow/>
                 </NavLink>
             </header>
-            <main className="h-full grow p-6">
-                {/*<pre>*/}
-                {/*    {order ? JSON.stringify(order, null, 2) : 'Not data'}*/}
-                {/*</pre>*/}
-                <h2 className="text-4xl font-bold mb-6">{trackId}</h2>
-                <p className="text-2xl font-medium mb-4">Константин Константинович К.</p>
-                <div className="mb-6">
-                    <ProductAvatar className="float-left mr-4"/>
-                    <div className="">
-                        <p className="pt-3 mb-1 text-xl font-medium">Название</p>
-                        <span className="block mb-1 font-medium">3 шт</span>
-                        <p className="text-gray-700">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis
-                            delectus
-                            distinctio neque odit placeat veritatis, vero? Commodi dolorem possimus repellat!</p>
-                    </div>
-                </div>
-                <Accordion title={"В пути"} open={statusOpen}
+            <main className="p-4">
+                <p className="text-2xl font-medium mb-4">{order?.customer}</p>
+                <h2 className="text-4xl font-bold mb-2">{trackId}</h2>
+                <p className="text-secondary-text dark:text-secondary-text-dark mb-4">Lorem ipsum dolor sit amet,
+                    consectetur adipisicing elit.
+                    Debitis
+                    delectus
+                    distinctio neque odit placeat veritatis, vero? Commodi dolorem possimus repellat!</p>
+
+
+                <Accordion className="mb-6" title={order?.statuses.currentStatus}
+                           open={statusOpen}
                            onToggle={() => setToggleStatus((prevState) => !prevState)}>
-                    <ul>
-                        <li>01.01.2025 - Создан</li>
-                        <li>02.01.2025 - Упакован</li>
-                        <li>03.01.2025 - Отправлен со склада</li>
-                        <li>04.01.2025 - В пути</li>
+                    <ul className="list-disc pl-6">
+                        {order?.statuses.historyStatuses.map((item) => {
+                            const date = new Date(item.date);
+
+                            return <li className='mb-2'>
+                                <p className="font-medium text-primary-text dark:text-primary-text-dark">{item.status}</p>
+                                <span>{date.toLocaleDateString()}</span>
+                                {' - '}
+                                <span>{date.toLocaleTimeString()}</span>
+                            </li>
+                        })
+                        }
                     </ul>
                 </Accordion>
 
+                {
+                    order?.products.map((item) => (
+                        /*<div className="mb-6">*/
+                        <div className="mb-6 flex flex-row ">
+                            <ProductAvatar className="mr-4"/>
+                            <div className="">
+                                <p className="pt-3 mb-1 text-xl font-medium">{item.label}</p>
+                                <p className="mb-1 font-medium text-secondary-text dark:text-secondary-text-dark">{item.count} шт</p>
+                                <p className="mb-1 font-medium text-secondary-text dark:text-secondary-text-dark">{item.price} руб/шт</p>
+                            </div>
+                        </div>
+                    ))
+                }
+
+
             </main>
-        </div>
+        </>
     );
 };

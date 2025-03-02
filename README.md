@@ -1,7 +1,8 @@
 ### TODO
 
 -[x] Add fonts
-    - [ ] check colors for fonts
+    - [x] check colors for fonts
 - [ ] Add loaders or skeletons
-- [ ] Check telegram dark mode
+- [x] Check telegram dark mode
 - [x] Add max width to container
+- [ ] Add active focus hover to Button, Input

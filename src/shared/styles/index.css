@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    --font-display: "Onest", serif;
+    --color-gray: #F5F5F5;
+    --color-gray-dark: var(--tg-theme-secondary-bg-color);
+    --color-primary-text: #27272A;
+    --color-primary-text-dark: #FFFFFF;
+    --color-secondary-text: var(--color-gray-700);
+    --color-secondary-text-dark: var(--tg-theme-hint-color);
+    --color-button-text: #FFFFFF;
+    --color-primary: #F35D00;
+}
+
+* {
+    box-sizing: border-box;
+}

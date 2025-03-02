@@ -11,7 +11,7 @@ export function Button(props: ButtonProps) {
     return (
         <button
             className={clsx(
-                "w-full px-5 py-7 bg-primary text-white text-2xl font-medium rounded-xl hover:bg-orange-700 transition cursor-pointer",
+                "w-full px-4 py-6 bg-primary text-button-text text-2xl font-medium rounded-xl hover:bg-orange-700 transition cursor-pointer",
                 className
             )}
             {...otherProps}

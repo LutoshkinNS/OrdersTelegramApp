@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import "./App.css";
+// import "./shared/styles/index.css";
 import {Input} from "./shared/components/Input/Input.tsx";
 import {Button} from "./shared/components/Button/Button.tsx";
 import {Logo} from "./shared/components/Logo/Logo.tsx";
@@ -8,22 +8,36 @@ import {useNavigate} from "react-router";
 
 export const url = "https://new-queens-return.loca.lt"
 
-export const tg = window.Telegram.WebApp;
+export interface ProductType {
+    id: number;
+    label: string;
+    price: number;
+    count: number;
+}
+
+export interface StatusType {
+    status: string;
+    date: number;
+}
+
+export interface StatusesType {
+    currentStatus: string;
+    historyStatuses: Array<StatusType>;
+}
 
 export interface OrderType {
-    description: string;
-    label: string;
-    stage: string;
-    data: unknown;
-    time_period: {
-        endDate: string;
-        startDate: string;
-    }
+    trackNumber: string;
+    customer: string;
+    totalValue: number;
+    products: Array<ProductType>;
+    description: string | null;
+    statuses: StatusesType
 }
 
 
-export default function App() {
-    const [inputValue, setInputValue] = useState<string>('KR-22');
+export default function App(props) {
+    const {tg} = props
+    const [inputValue, setInputValue] = useState<string>('АТ0758');
     const [order, setOrder] = useState<OrderType | undefined>()
 
     const navigate = useNavigate();
@@ -32,7 +46,7 @@ export default function App() {
 
     useEffect(() => {
         tg.ready();
-    }, []);
+    }, [tg]);
 
     const handleSubmit = () => {
         navigate(`/order/${inputValue}`)
@@ -46,9 +60,9 @@ export default function App() {
         <>
             <header
                 className="max-w-4xl px-6 py-4 border border-transparent">
-                <Logo/>
+                <Logo color={tg.colorScheme === 'light' ? 'dark' : 'light'}/>
             </header>
-            <main className="p-6">
+            <main className="p-4">
                 {/*{*/}
                 {/*    tg.initDataUnsafe.user?.id*/}
                 {/*}*/}
@@ -57,7 +71,9 @@ export default function App() {
                        value={inputValue}
                        onInput={(e) => setInputValue(e.target.value)} autoFocus={true}/>
                 <Button className="mb-4" onClick={handleSubmit}>Отследить посылку</Button>
-                <p className="text-center text-gray-700 text-xl">Нажимая кнопку, вы соглашаетесь с обработкой
+                <p className="text-center text-secondary-text dark:text-secondary-text-dark text-l">Нажимая
+                    кнопку, вы соглашаетесь с
+                    обработкой
                     персональных
                     данных и
                     политикой

@@ -1,0 +1,7 @@
+:root {
+    --gray: var(--color-gray-50);
+    --primary-text: var(--tg-theme-text-color);
+    --secondary-text: var(--tg-theme-hint-color);
+    --accent-text: var(--tg-theme-accent-text-color);
+    --primary: #F35D00;
+}
