@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
 import { Input } from "../shared/components/Input/Input.tsx";
 import { Button } from "../shared/components/Button/Button.tsx";
@@ -39,7 +39,7 @@ type MainProps = {
 
 export default function Main(props: MainProps) {
   const { tg, setOrder } = props;
-  const [inputValue, setInputValue] = useState<string>("АТ0758");
+  const [inputValue, setInputValue] = useState<string>("AT7749");
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const navigate = useNavigate();
@@ -50,11 +50,17 @@ export default function Main(props: MainProps) {
       try {
         setIsLoading(true);
         const order = await fetchOrder(inputValue);
-        setOrder(order);
-        navigate(`/order/${inputValue}`);
+
+        if (order) {
+          console.log("fetchOrder", order);
+          setOrder(order);
+          navigate(`/order/${inputValue}`);
+        } else {
+          notify("Заказ не найден");
+        }
       } catch (error) {
-        console.error('Error fetching order:', error);
-        notify('Ошибка при получении заказа');
+        console.error("Error fetching order:", error);
+        notify(`${error}`);
       } finally {
         setIsLoading(false);
       }
@@ -83,8 +89,6 @@ export default function Main(props: MainProps) {
           Нажимая кнопку, вы соглашаетесь с обработкой персональных данных и
           политикой конфиденциальности
         </p>
-
-        
       </main>
     </>
   );
