@@ -1,8 +1,9 @@
 import { useState } from "react";
+import { toast } from 'react-toastify';
+import { useNavigate } from "react-router";
 import { Input } from "../shared/components/Input/Input.tsx";
 import { Button } from "../shared/components/Button/Button.tsx";
 import { Logo } from "../shared/components/Logo/Logo.tsx";
-import { useNavigate } from "react-router";
 import { fetchOrder } from "../shared/api/fetchOrder.ts";
 
 export interface ProductType {
@@ -42,6 +43,7 @@ export default function Main(props: MainProps) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const navigate = useNavigate();
+  const notify = (e: string) => toast.error(e);
 
   const handleSubmit = async () => {
     if (inputValue !== "") {
@@ -52,6 +54,7 @@ export default function Main(props: MainProps) {
         navigate(`/order/${inputValue}`);
       } catch (error) {
         console.error('Error fetching order:', error);
+        notify('Ошибка при получении заказа');
       } finally {
         setIsLoading(false);
       }
@@ -80,6 +83,8 @@ export default function Main(props: MainProps) {
           Нажимая кнопку, вы соглашаетесь с обработкой персональных данных и
           политикой конфиденциальности
         </p>
+
+        
       </main>
     </>
   );
