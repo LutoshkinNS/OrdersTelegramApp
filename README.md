@@ -7,8 +7,8 @@
 
 ### TODO
 
--[x] Add fonts - [x] check colors for fonts
-
+- [x] Add fonts
+  - [x] check colors for fonts
 - [x] Add loaders or skeletons
 - [x] Check telegram dark mode
 - [x] Add max width to container
