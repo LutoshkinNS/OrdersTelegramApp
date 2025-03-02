@@ -6,7 +6,7 @@
   "scripts": {
     "start": "cross-env NODE_ENV=dev vite",
     "start:bot": "cross-env NODE_ENV=dev nodemon ./src/bot.js",
-    "build": "tsc -b && vite build",
+    "build": "tsc --noEmit && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
