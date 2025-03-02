@@ -1,3 +1,4 @@
+import path from "path"
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import * as dotenv from "dotenv";
@@ -13,5 +14,10 @@ export default defineConfig({
       port: 8081,
       allowedHosts: [env ? env.TELEGRAM_APP_DOMAIN : ''],
       cors: true
-  }
+  },
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+    },
+  },
 })

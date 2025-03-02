@@ -14,4 +14,5 @@
 - [x] Add max width to container
 - [ ] Add active focus hover to Button, Input
 - [x] Add error notification
-- [ ] Add other images
+- [ ] Add galery other images
+- [ ] Add dialog with big image of product

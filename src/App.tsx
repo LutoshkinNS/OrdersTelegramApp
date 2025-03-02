@@ -5,6 +5,8 @@ import { Order } from "./pages/Order.tsx";
 import { useEffect, useState } from "react";
 import { StoreProvider } from "./context/StoreContext.tsx";
 
+import "./shared/styles/index.css";
+
 export const tg = window.Telegram.WebApp;
 
 export const App = () => {

@@ -11,16 +11,42 @@ import {
   fetchOrderImages,
   FetchOrderImagesResponse,
 } from "../shared/api/fetchOrderImages.ts";
+import { fetchOrder } from "../shared/api/fetchOrder.ts";
 
 export const Order = () => {
-  const { order } = useStore();
+  const { order, setOrder } = useStore();
   const { trackId } = useParams();
   const [statusOpen, setToggleStatus] = useState<boolean>(false);
   const [images, setImages] = useState<FetchOrderImagesResponse>();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const notify = (e: string) => toast.error(e);
 
-  if (!order) {
-    return <div>Order not found</div>;
-  }
+  useEffect(() => {
+    const getOrder = async () => {
+      if (trackId) {
+        try {
+          setIsLoading(true);
+          const respOrder = await fetchOrder(trackId);
+
+          if (respOrder) {
+            console.log("fetchOrder", respOrder);
+            setOrder(respOrder);
+          } else {
+            notify("Заказ не найден");
+          }
+        } catch (error) {
+          console.error("Error fetching order:", error);
+          notify(`${error}`);
+        } finally {
+          setIsLoading(false);
+        }
+      }
+    };
+
+    if (!order) {
+      getOrder();
+    }
+  }, [trackId, order]);
 
   useEffect(() => {
     const loadImage = async () => {
@@ -29,17 +55,13 @@ export const Order = () => {
 
         const images = await fetchOrderImages({
           trackNumber: trackId,
-          width: 112,
-          height: 112,
+          // width: 112,
+          // height: 112,
           quality: 80,
         });
 
         console.log("fetchImages", images);
         setImages(images);
-
-        // if (images && images.length > 0) {
-        //   setImageUrl(images[0].imageBase64);
-        // }
       } catch (err) {
         console.error("Error loading image:", err);
         toast.error("Ошибка при загрузке изображений");
@@ -48,6 +70,10 @@ export const Order = () => {
 
     loadImage();
   }, [trackId]);
+
+  if (!order) {
+    return <div>Order not found</div>;
+  }
 
   return (
     <>
@@ -86,6 +112,10 @@ export const Order = () => {
             })}
           </ul>
         </Accordion>
+
+        <p className="text-2xl font-medium mb-4">
+          Общая стоимость: {order.totalValue} руб
+        </p>
 
         {order.products.map((item) => (
           <div key={item.id} className="mb-6 flex flex-row">
