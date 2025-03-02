@@ -1,7 +1,11 @@
 import {Outlet} from "react-router";
 import clsx from "clsx";
 
-export const Layout = (props) => {
+type LayoutProps = {
+    themeMode: string;
+}
+
+export const Layout = (props: LayoutProps) => {
     const {themeMode} = props
 
     return (

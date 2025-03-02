@@ -1,0 +1,1 @@
+export const FETCH_URL = 'https://new-queens-return.loca.lt'
