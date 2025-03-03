@@ -12,6 +12,7 @@ import {
   FetchOrderImagesResponse,
 } from "../shared/api/fetchOrderImages.ts";
 import { fetchOrder } from "../shared/api/fetchOrder.ts";
+import Dialog from "@/shared/components/Dialog/Dialog.tsx";
 
 export const Order = () => {
   const { order, setOrder } = useStore();
@@ -119,10 +120,26 @@ export const Order = () => {
 
         {order.products.map((item) => (
           <div key={item.id} className="mb-6 flex flex-row">
-            <ProductAvatar
-              className="mr-4"
-              url={images?.find((image) => image.id === item.id)?.imageBase64}
+            <Dialog
+              trigger={
+                <ProductAvatar
+                  className="mr-4"
+                  url={
+                    images?.find((image) => image.id === item.id)?.imageBase64
+                  }
+                />
+              }
+              content={
+                <img
+                  src={
+                    images?.find((image) => image.id === item.id)?.imageBase64
+                  }
+                  alt="product"
+                  className={"w-full h-full"}
+                />
+              }
             />
+
             <div className="">
               <p className="pt-3 mb-1 text-xl font-medium">{item.label}</p>
               <p className="mb-1 font-medium text-secondary-text dark:text-secondary-text-dark">
@@ -134,6 +151,26 @@ export const Order = () => {
             </div>
           </div>
         ))}
+        <p className="text-2xl font-medium mb-4">Фотографии заказа</p>
+        <div className="flex flex-row">
+          {images?.map(
+            (image) =>
+              image.id === 0 && (
+                <Dialog
+                  trigger={
+                    <ProductAvatar className="mr-4" url={image.imageBase64} />
+                  }
+                  content={
+                    <img
+                      src={image.imageBase64}
+                      alt="product"
+                      className={"w-full h-full"}
+                    />
+                  }
+                />
+              )
+          )}
+        </div>
       </main>
     </>
   );
