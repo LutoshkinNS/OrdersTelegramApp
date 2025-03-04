@@ -27,7 +27,7 @@ export const App = () => {
                 <StoreProvider value={{order, setOrder}}>
                     <Routes>
                         <Route element={<Layout themeMode={tg.colorScheme}/>}>
-                            <Route path="/" element={<Main tg={tg} setOrder={setOrder}/>}/>
+                            <Route path="/" element={<Main setOrder={setOrder}/>}/>
                             <Route path="/order/:trackId" element={<Order/>}/>
                             <Route path="/error" element={<Error/>}/>
                         </Route>

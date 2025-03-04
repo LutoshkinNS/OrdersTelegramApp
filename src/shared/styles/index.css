@@ -12,6 +12,7 @@
     --color-secondary-text-dark: var(--tg-theme-hint-color);
     --color-button-text: #FFFFFF;
     --color-primary: #F35D00;
+    --color-bg: var(--tg-theme-bg-color, white);
 }
 
 * {

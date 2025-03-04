@@ -1,0 +1,25 @@
+<svg width="801" height="401" viewBox="0 0 801 401" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="801" height="401" fill="white"/>
+<path d="M39 45H130C187.438 45 234 91.5624 234 149V253C234 310.438 187.438 357 130 357H39V45Z" fill="black"/>
+<path d="M60 67H135C176.421 67 210 100.579 210 142V258C210 299.974 175.974 334 134 334H60V67Z" fill="white"/>
+<path d="M82.5 89.5H129C161.309 89.5 187.5 115.691 187.5 148V252C187.5 284.309 161.309 310.5 129 310.5H82.5V89.5Z" stroke="black" stroke-width="23"/>
+<rect x="64.3497" y="80.9235" width="14" height="54" transform="rotate(-45 64.3497 80.9235)" fill="white"/>
+<rect x="180.955" y="309.854" width="14" height="31.4362" transform="rotate(-45 180.955 309.854)" fill="white"/>
+<rect x="67" y="299" width="10" height="32" transform="rotate(-90 67 299)" fill="white"/>
+<rect x="48" y="322" width="23" height="32" transform="rotate(-90 48 322)" fill="black"/>
+<rect x="39" y="334" width="12" height="21" transform="rotate(-90 39 334)" fill="white"/>
+<rect x="324" y="45" width="152" height="312" fill="white"/>
+<rect x="324" y="45" width="23" height="282" fill="black"/>
+<rect x="324" y="45" width="23" height="282" fill="black"/>
+<rect x="356" y="45" width="23" height="250" fill="black"/>
+<rect x="356" y="45" width="23" height="250" fill="black"/>
+<rect x="324" y="327" width="23" height="152" transform="rotate(-90 324 327)" fill="black"/>
+<rect x="324" y="327" width="23" height="152" transform="rotate(-90 324 327)" fill="black"/>
+<rect x="324" y="357" width="23" height="152" transform="rotate(-90 324 357)" fill="black"/>
+<rect x="324" y="357" width="23" height="152" transform="rotate(-90 324 357)" fill="black"/>
+<rect x="577.5" y="55.5" width="171" height="289" rx="83.5" stroke="black" stroke-width="23"/>
+<rect x="611.5" y="87.6029" width="105" height="226.801" rx="52.5" stroke="black" stroke-width="23"/>
+<rect width="11.0177" height="27.0434" transform="matrix(0.705971 -0.708241 0.705971 0.708241 612 97.9512)" fill="white"/>
+<rect width="11.0177" height="27.0434" transform="matrix(0.705971 -0.708241 0.705971 0.708241 712 310.803)" fill="white"/>
+<rect x="704" y="151.344" width="58" height="97.3119" fill="white"/>
+</svg>

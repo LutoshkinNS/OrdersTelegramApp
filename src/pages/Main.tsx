@@ -33,12 +33,12 @@ export interface OrderType {
 }
 
 type MainProps = {
-    tg: any;
+    tg?: any;
     setOrder: (order: OrderType) => void;
 };
 
 export default function Main(props: MainProps) {
-    const {tg, setOrder} = props;
+    const {setOrder} = props;
     // const [inputValue, setInputValue] = useState<string>("АТ0758");
     const [inputValue, setInputValue] = useState<string>("AT7749");
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -71,7 +71,7 @@ export default function Main(props: MainProps) {
     return (
         <>
             <header className="max-w-4xl px-6 py-4 border border-transparent">
-                <Logo color={tg.colorScheme === "light" ? "dark" : "light"}/>
+                <Logo/>
             </header>
             <main className="p-4">
                 <Input
