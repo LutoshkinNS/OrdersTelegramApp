@@ -20,5 +20,5 @@
 - [x] Fix close button in dialog
 - [X] Errors boundary
 - [ ] Add loaders for imgs
-- [ ] Add svg logo
+- [x] Add svg logo
 - [ ] tailwind merge vs clsx?
