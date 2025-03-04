@@ -18,3 +18,7 @@
 - [x] Add dialog with big image of product
 - [x] Fix padding right image product
 - [x] Fix close button in dialog
+- [X] Errors boundary
+- [ ] Add loaders for imgs
+- [ ] Add svg logo
+- [ ] tailwind merge vs clsx?
