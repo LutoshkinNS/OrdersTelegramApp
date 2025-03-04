@@ -151,26 +151,32 @@ export const Order = () => {
                         </div>
                     </div>
                 ))}
-                <p className="text-2xl font-medium mb-4">Фотографии заказа</p>
-                <div className="flex flex-row">
-                    {images?.map(
-                        (image) =>
-                            image.id === 0 && (
-                                <Dialog
-                                    trigger={
-                                        <ProductAvatar className="mr-4" url={image.imageBase64}/>
-                                    }
-                                    content={
-                                        <img
-                                            src={image.imageBase64}
-                                            alt="product"
-                                            className={"w-full h-full"}
-                                        />
-                                    }
-                                />
-                            )
-                    )}
-                </div>
+                {images?.find((image) => image.id === 0) ? (
+                    <>
+                        <p className="text-2xl font-medium mb-4">Фотографии заказа</p>
+                        <div className="flex flex-row">
+                            {images?.map(
+                                (image) =>
+                                    image.id === 0 && (
+                                        <div className='flex-wrap'>
+                                            <Dialog
+                                                trigger={
+                                                    <ProductAvatar className="mr-4" url={image.imageBase64}/>
+                                                }
+                                                content={
+                                                    <img
+                                                        src={image.imageBase64}
+                                                        alt="product"
+                                                        className={"w-full h-full"}
+                                                    />
+                                                }
+                                            />
+                                        </div>
+                                    )
+                            )}
+                        </div>
+                    </>
+                ) : null}
             </main>
         </>
     );
