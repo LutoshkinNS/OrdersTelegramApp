@@ -16,5 +16,5 @@
 - [x] Add error notification
 - [x] Add gallery other images
 - [x] Add dialog with big image of product
-- [ ] Fix padding right image product
+- [x] Fix padding right image product
 - [ ] Fix close button in dialog
