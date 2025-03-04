@@ -153,7 +153,7 @@ export const Order = () => {
                 ))}
                 {images?.find((image) => image.id === 0) ? (
                     <>
-                        <p className="text-2xl font-medium mb-4">Фотографии заказа</p>
+                        <p className="text-2xl font-medium mb-4 ">Фотографии заказа</p>
                         <div className="flex flex-row">
                             {images?.map(
                                 (image) =>
@@ -161,7 +161,7 @@ export const Order = () => {
                                         <div className='flex-wrap'>
                                             <Dialog
                                                 trigger={
-                                                    <ProductAvatar className="mr-4" url={image.imageBase64}/>
+                                                    <ProductAvatar className="mr-4 mb-4" url={image.imageBase64}/>
                                                 }
                                                 content={
                                                     <img
@@ -176,7 +176,13 @@ export const Order = () => {
                             )}
                         </div>
                     </>
-                ) : null}
+                ) : <>
+                    <div className="mb-4 bg-gray dark:bg-gray-dark rounded-3xl w-55 h-6 animate-pulse"></div>
+                    <div className="flex flex-row flex-wrap">
+                        <div className="mr-4 mb-4 bg-gray dark:bg-gray-dark rounded-3xl w-28 h-28 animate-pulse"></div>
+                        <div className="mr-4 mb-4 bg-gray dark:bg-gray-dark rounded-3xl w-28 h-28 animate-pulse"></div>
+                    </div>
+                </>}
             </main>
         </>
     );

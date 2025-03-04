@@ -19,6 +19,6 @@
 - [x] Fix padding right image product
 - [x] Fix close button in dialog
 - [X] Errors boundary
-- [ ] Add loaders for imgs
+- [x] Add loaders for imgs
 - [x] Add svg logo
 - [ ] tailwind merge vs clsx?
