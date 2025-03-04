@@ -136,13 +136,12 @@ export const Order = () => {
                                         images?.find((image) => image.id === item.id)?.imageBase64
                                     }
                                     alt="product"
-                                    className={"w-full h-full"}
                                 />
                             }
                         />
 
                         <div className="">
-                            <p className="pt-3 mb-1 text-xl font-medium">{"font-medium text-secondary-text dark:text-secondary-text-dark"}</p>
+                            <p className="pt-3 mb-1 text-xl font-medium">{item.label}</p>
                             <p className="mb-1 font-medium text-secondary-text dark:text-secondary-text-dark">
                                 {item.count} шт
                             </p>
