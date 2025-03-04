@@ -17,4 +17,4 @@
 - [x] Add gallery other images
 - [x] Add dialog with big image of product
 - [x] Fix padding right image product
-- [ ] Fix close button in dialog
+- [x] Fix close button in dialog
