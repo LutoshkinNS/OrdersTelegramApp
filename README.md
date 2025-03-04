@@ -23,3 +23,5 @@
 - [x] Add loaders for imgs
 - [x] Add svg logo
 - [ ] tailwind merge vs clsx?
+- [ ] Change components
+- [ ] REFACTOR!!!
