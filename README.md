@@ -8,11 +8,13 @@
 ### TODO
 
 - [x] Add fonts
-  - [x] check colors for fonts
+    - [x] check colors for fonts
 - [x] Add loaders or skeletons
 - [x] Check telegram dark mode
 - [x] Add max width to container
 - [ ] Add active focus hover to Button, Input
 - [x] Add error notification
-- [ ] Add galery other images
-- [ ] Add dialog with big image of product
+- [x] Add gallery other images
+- [x] Add dialog with big image of product
+- [ ] Fix padding right image product
+- [ ] Fix close button in dialog
