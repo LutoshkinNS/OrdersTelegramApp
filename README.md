@@ -4,6 +4,7 @@
 - do `npm install` in repository terminal
 - fix `FETCH_URL` in `src/shared/api/config.ts` to your backend url
 - do `npm run start` and open `localhost:8081`
+- for production build `npm run build` and take from `dist`
 
 ### TODO
 
