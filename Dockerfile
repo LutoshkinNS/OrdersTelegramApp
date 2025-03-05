@@ -5,7 +5,6 @@ RUN npm install
 COPY . .
 RUN npm run build
 
-# Запускаем сервер для фронта
 FROM node:18
 WORKDIR /app
 COPY --from=build /app/dist .
