@@ -3,7 +3,6 @@ import {useEffect, useState} from "react";
 import {toast} from "react-toastify";
 
 import {Arrow} from "../shared/components/Arrow/Arrow.tsx";
-// import {mockData} from "../../mock.ts";
 import {ProductAvatar} from "../shared/components/ProductAvatar/ProductAvatar.tsx";
 import {Accordion} from "../shared/components/Accordion/Accordion.tsx";
 import {useStore} from "../context/StoreContext.tsx";
