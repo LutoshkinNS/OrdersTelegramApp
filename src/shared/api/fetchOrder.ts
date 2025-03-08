@@ -1,4 +1,5 @@
-import {FETCH_URL} from "./config.ts";
+// для nginx указываем относительные пути
+// import {FETCH_URL} from "./config.ts";
 
 export interface ProductType {
     id: number;
@@ -33,9 +34,9 @@ export interface ErrorType {
 
 export const fetchOrder = async (trackNumber: string): Promise<OrderType> => {
     try {
-        console.log('Fetching order from:', `${FETCH_URL}/api/order?trackNumber=${trackNumber}`);
+        console.log('Fetching order from:', `/api/order?trackNumber=${trackNumber}`);
         
-        const response = await fetch(`${FETCH_URL}/api/order?trackNumber=${trackNumber}`, {
+        const response = await fetch(`/api/order?trackNumber=${trackNumber}`, {
             method: 'GET',
             // headers: {
             //     'Accept': 'application/json',

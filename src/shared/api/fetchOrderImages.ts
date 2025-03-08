@@ -1,4 +1,5 @@
-import { FETCH_URL } from "./config";
+// для nginx указываем относительные пути
+// import { FETCH_URL } from "./config";
 
 interface FetchOrderImageParams {
     trackNumber: string;
@@ -22,7 +23,7 @@ export const fetchOrderImages = async ({
     quality
 }: FetchOrderImageParams): Promise<FetchOrderImagesResponse> => {
     try {
-        let url = `${FETCH_URL}/api/order/image?trackNumber=${trackNumber}`;
+        let url = `/api/order/image?trackNumber=${trackNumber}`;
         
         if (width) url += `&width=${width}`;
         if (height) url += `&height=${height}`;
