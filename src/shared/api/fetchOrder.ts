@@ -19,10 +19,10 @@ export interface StatusesType {
 
 export interface OrderType {
     trackNumber: string;
-    customer: string;
+    customer?: string;
     totalValue: number;
-    products: Array<ProductType>;
-    description: string | null;
+    products?: Array<ProductType>;
+    description?: string | null;
     statuses: StatusesType;
 }
 

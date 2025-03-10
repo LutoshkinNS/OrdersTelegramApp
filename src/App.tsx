@@ -3,10 +3,11 @@ import {ErrorBoundary} from "react-error-boundary";
 import {useEffect, useState} from "react";
 
 import {Layout} from "./shared/components/Layout/Layout.tsx";
-import Main, {OrderType} from "@/pages/Main.tsx";
+import Main from "@/pages/Main.tsx";
 import {Error} from "@/pages/Error.tsx";
 import {Order} from "@/pages/Order.tsx";
 import {StoreProvider} from "./context/StoreContext.tsx";
+import {OrderType} from "@/shared/api/fetchOrder.ts";
 
 import "./shared/styles/index.css";
 

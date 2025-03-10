@@ -18,7 +18,7 @@ export const Order = () => {
     const {trackId} = useParams();
     const [statusOpen, setToggleStatus] = useState<boolean>(false);
     const [images, setImages] = useState<FetchOrderImagesResponse>();
-    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [isLoadingOrder, setIsLoading] = useState<boolean>(false);
     const notify = (e: string) => toast.error(e);
 
     useEffect(() => {
@@ -85,9 +85,14 @@ export const Order = () => {
             <main className="p-4">
                 <p className="text-2xl font-medium mb-4">{order.customer}</p>
                 <h2 className="text-4xl font-bold mb-2">{trackId}</h2>
-                <p className="text-secondary-text dark:text-secondary-text-dark mb-4">
-                    {order.description}
-                </p>
+                {order.description ?
+                    (
+                        <p className="text-secondary-text dark:text-secondary-text-dark mb-4">
+                            {order.description}
+                        </p>
+                    ) :
+                    null
+                }
 
                 <Accordion
                     className="mb-6"
@@ -96,13 +101,13 @@ export const Order = () => {
                     onToggle={() => setToggleStatus((prevState) => !prevState)}
                 >
                     <ul className="list-disc pl-6">
-                        {order.statuses.historyStatuses.map((item, idx) => {
-                            const date = new Date(item.date);
+                        {order.statuses.historyStatuses.map((status, idx) => {
+                            const date = new Date(status.date);
 
                             return (
                                 <li key={idx} className="mb-2">
                                     <p className="font-medium text-primary-text dark:text-primary-text-dark">
-                                        {item.status}
+                                        {status.status}
                                     </p>
                                     <span>{date.toLocaleDateString()}</span>
                                     {" - "}
@@ -117,22 +122,22 @@ export const Order = () => {
                     Общая стоимость: {order.totalValue} руб
                 </p>
 
-                {order.products.map((item) => (
-                    <div key={item.id} className="mb-6 flex flex-row">
+                {order.products?.map((product) => (
+                    <div key={product.id} className="mb-6 flex flex-row">
                         <Dialog
                             classNameTrigger="shrink-0"
                             trigger={
                                 <ProductAvatar
                                     className="mr-4"
                                     url={
-                                        images?.find((image) => image.id === item.id)?.imageBase64
+                                        images?.find((image) => image.id === product.id)?.imageBase64
                                     }
                                 />
                             }
                             content={
                                 <img
                                     src={
-                                        images?.find((image) => image.id === item.id)?.imageBase64
+                                        images?.find((image) => image.id === product.id)?.imageBase64
                                     }
                                     alt="product"
                                 />
@@ -140,12 +145,12 @@ export const Order = () => {
                         />
 
                         <div className="">
-                            <p className="pt-3 mb-1 text-xl font-medium">{item.label}</p>
+                            <p className="pt-3 mb-1 text-xl font-medium">{product.label}</p>
                             <p className="mb-1 font-medium text-secondary-text dark:text-secondary-text-dark">
-                                {item.count} шт
+                                {product.count} шт
                             </p>
                             <p className="mb-1 font-medium text-secondary-text dark:text-secondary-text-dark">
-                                {item.price} руб/шт
+                                {product.price} руб/шт
                             </p>
                         </div>
                     </div>
