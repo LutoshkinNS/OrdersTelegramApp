@@ -11,7 +11,7 @@ export function Input(props: InputProps) {
     return (
         <InputBase
             className={clsx(
-                "w-full px-5 py-4 bg-gray dark:bg-gray-dark font-medium text-primary-text dark:text-primary-text-dark border-none rounded-xl outline-2",
+                "w-full px-5 py-4 bg-gray dark:bg-gray-dark font-medium text-primary-text dark:text-primary-text-dark border-none rounded-xl outline-2 outline-transparent",
                 "focus:outline-primary",
                 className
             )}
