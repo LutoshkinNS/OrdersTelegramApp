@@ -43,23 +43,23 @@ export default function Main(props: MainProps) {
 
     return (
         <>
-            <header className="max-w-4xl px-6 py-4 border border-transparent">
+            <header className="flex justify-center items-center px-6 py-4 border border-transparent">
                 <Logo/>
             </header>
             <main className="p-4">
                 <Input
-                    className="mb-6 text-2xl"
+                    className="mb-6 text-xl"
                     type="text"
                     inputMode="text"
-                    placeholder="Номер заказа"
+                    placeholder="Введите номер заказа"
                     value={inputValue}
                     onInput={(e) => setInputValue(e.target.value)}
                     autoFocus={true}
                 />
-                <Button className="mb-4" onClick={handleSubmit} disabled={isLoading}>
+                <Button className="mb-4 text-xl" onClick={handleSubmit} disabled={isLoading}>
                     {isLoading ? "Загрузка..." : "Отследить посылку"}
                 </Button>
-                <p className="text-center text-secondary-text dark:text-secondary-text-dark text-l">
+                <p className="text-center text-secondary-text dark:text-secondary-text-dark text-sm">
                     Нажимая кнопку, вы соглашаетесь с обработкой персональных данных и
                     политикой конфиденциальности
                 </p>

@@ -53,6 +53,6 @@ export const LogoSVG = (props: LogoSVGProps) => {
 export const Logo = () => {
 
     return (
-        <LogoSVG className={'max-w-32 max-h-16'}/>
+        <LogoSVG className={'max-w-48 max-h-16'}/>
     );
 };
