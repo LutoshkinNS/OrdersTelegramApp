@@ -27,3 +27,4 @@
 - [ ] REFACTOR!!!
 - [x] Add logo to order page
 - [ ] Fix blur
+- [ ] Block dialog if images not loaded
