@@ -26,5 +26,5 @@
 - [x] Replace components
 - [ ] REFACTOR!!!
 - [x] Add logo to order page
-- [ ] Fix blur
+- [x] Fix blur
 - [ ] Block dialog if images not loaded
