@@ -7,7 +7,6 @@ import {
     FetchOrderImagesResponse,
 } from "@/shared/api/fetchOrderImages.ts";
 import {fetchOrder} from "@/shared/api/fetchOrder.ts";
-import {Logo} from "@/shared/components/Logo/Logo.tsx";
 import {Customer} from "@/shared/components/Customer/Customer.tsx";
 import {HeaderText} from "@/shared/components/Header/HeaderText.tsx";
 import {Description} from "@/shared/components/Description/Description.tsx";
@@ -15,15 +14,13 @@ import {TotalCost} from "@/shared/components/TotalCost/TotalCost.tsx";
 import {Statuses} from "@/shared/components/Statuses/Statuses.tsx";
 import {Products} from "@/shared/components/Products/Products.tsx";
 import {ImagesDuringDelivery} from "@/shared/components/ImagesDuringDelivery/ImagesDuringDelivery.tsx";
-import {ArrowBackBlock} from "@/shared/components/ArrowBackBlock/ArrowBackBlock.tsx";
 
 import {useStore} from "../context/StoreContext.tsx";
 import {mockOrder} from "@/shared/api/mock.ts";
 
 export const Order = () => {
     const {setOrder} = useStore();
-    const order = mockOrder
-
+    const order = mockOrder;
 
     const {trackId} = useParams();
     const [images, setImages] = useState<FetchOrderImagesResponse>();
@@ -85,22 +82,19 @@ export const Order = () => {
     }
 
     return (
-        <>
-            <header className="flex items-center max-w-4xl px-6 py-4 border border-transparent">
-                <ArrowBackBlock/>
-                <div className="shrink-0 flex justify-center items-center">
-                    <Logo></Logo>
-                </div>
-            </header>
-            <main className="p-4">
-                <Customer name={order.customer}/>
-                <HeaderText tag={'h2'} className="mb-2">{trackId}</HeaderText>
-                <Description>{order.description}</Description>
-                <Statuses statuses={order.statuses.historyStatuses} currentStatus={order.statuses.currentStatus}/>
-                <TotalCost>{order.totalValue}</TotalCost>
-                <Products products={order.products} images={images}/>
-                <ImagesDuringDelivery images={images}/>
-            </main>
-        </>
+        <div className="p-4">
+            <Customer name={order.customer}/>
+            <HeaderText tag={"h2"} className="mb-2">
+                {trackId}
+            </HeaderText>
+            <Description>{order.description}</Description>
+            <Statuses
+                statuses={order.statuses.historyStatuses}
+                currentStatus={order.statuses.currentStatus}
+            />
+            <TotalCost>{order.totalValue}</TotalCost>
+            <Products products={order.products} images={images}/>
+            <ImagesDuringDelivery images={images}/>
+        </div>
     );
 };

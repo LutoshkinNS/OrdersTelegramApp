@@ -25,5 +25,5 @@
 - [ ] tailwind merge vs clsx?
 - [x] Replace components
 - [ ] REFACTOR!!!
-- [ ] Add logo to order page
+- [x] Add logo to order page
 - [ ] Fix blur

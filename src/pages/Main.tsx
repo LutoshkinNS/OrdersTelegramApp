@@ -3,7 +3,6 @@ import {toast} from "react-toastify";
 import {useNavigate} from "react-router";
 import {Input} from "@/shared/components/Input/Input.tsx";
 import {Button} from "@/shared/components/Button/Button.tsx";
-import {Logo} from "@/shared/components/Logo/Logo.tsx";
 import {fetchOrder, OrderType} from "@/shared/api/fetchOrder.ts";
 
 type MainProps = {
@@ -42,28 +41,23 @@ export default function Main(props: MainProps) {
     };
 
     return (
-        <>
-            <header className="flex justify-center items-center px-6 py-4 border border-transparent">
-                <Logo/>
-            </header>
-            <main className="p-4">
-                <Input
-                    className="mb-6 text-xl"
-                    type="text"
-                    inputMode="text"
-                    placeholder="Введите номер заказа"
-                    value={inputValue}
-                    onInput={(e) => setInputValue(e.target.value)}
-                    autoFocus={true}
-                />
-                <Button className="mb-4 text-xl" onClick={handleSubmit} disabled={isLoading}>
-                    {isLoading ? "Загрузка..." : "Отследить посылку"}
-                </Button>
-                <p className="text-center text-secondary-text dark:text-secondary-text-dark text-sm">
-                    Нажимая кнопку, вы соглашаетесь с обработкой персональных данных и
-                    политикой конфиденциальности
-                </p>
-            </main>
-        </>
+        <div className="p-4">
+            <Input
+                className="mb-6 text-xl"
+                type="text"
+                inputMode="text"
+                placeholder="Введите номер заказа"
+                value={inputValue}
+                onInput={(e) => setInputValue(e.target.value)}
+                autoFocus={true}
+            />
+            <Button className="mb-4 text-xl" onClick={handleSubmit} disabled={isLoading}>
+                {isLoading ? "Загрузка..." : "Отследить посылку"}
+            </Button>
+            <p className="text-center text-secondary-text dark:text-secondary-text-dark text-sm">
+                Нажимая кнопку, вы соглашаетесь с обработкой персональных данных и
+                политикой конфиденциальности
+            </p>
+        </div>
     );
 }
