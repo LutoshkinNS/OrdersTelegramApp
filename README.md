@@ -13,7 +13,7 @@
 - [x] Add loaders or skeletons
 - [x] Check telegram dark mode
 - [x] Add max width to container
-- [ ] Add active focus hover to Button, Input
+- [x] Add active focus hover to Button, Input
 - [x] Add error notification
 - [x] Add gallery other images
 - [x] Add dialog with big image of product
@@ -23,5 +23,7 @@
 - [x] Add loaders for imgs
 - [x] Add svg logo
 - [ ] tailwind merge vs clsx?
-- [ ] Replace components
+- [x] Replace components
 - [ ] REFACTOR!!!
+- [ ] Add logo to order page
+- [ ] Fix blur

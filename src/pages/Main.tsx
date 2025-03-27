@@ -1,10 +1,10 @@
 import {useState} from "react";
 import {toast} from "react-toastify";
 import {useNavigate} from "react-router";
-import {Input} from "../shared/components/Input/Input.tsx";
-import {Button} from "../shared/components/Button/Button.tsx";
-import {Logo} from "../shared/components/Logo/Logo.tsx";
-import {fetchOrder, OrderType} from "../shared/api/fetchOrder.ts";
+import {Input} from "@/shared/components/Input/Input.tsx";
+import {Button} from "@/shared/components/Button/Button.tsx";
+import {Logo} from "@/shared/components/Logo/Logo.tsx";
+import {fetchOrder, OrderType} from "@/shared/api/fetchOrder.ts";
 
 type MainProps = {
     tg?: any;

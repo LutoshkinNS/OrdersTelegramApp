@@ -1,22 +1,31 @@
-import {NavLink, useParams} from "react-router";
+import {useParams} from "react-router";
 import {useEffect, useState} from "react";
 import {toast} from "react-toastify";
 
-import {Arrow} from "../shared/components/Arrow/Arrow.tsx";
-import {ProductAvatar} from "../shared/components/ProductAvatar/ProductAvatar.tsx";
-import {Accordion} from "../shared/components/Accordion/Accordion.tsx";
-import {useStore} from "../context/StoreContext.tsx";
 import {
     fetchOrderImages,
     FetchOrderImagesResponse,
-} from "../shared/api/fetchOrderImages.ts";
-import {fetchOrder} from "../shared/api/fetchOrder.ts";
-import Dialog from "@/shared/components/Dialog/Dialog.tsx";
+} from "@/shared/api/fetchOrderImages.ts";
+import {fetchOrder} from "@/shared/api/fetchOrder.ts";
+import {Logo} from "@/shared/components/Logo/Logo.tsx";
+import {Customer} from "@/shared/components/Customer/Customer.tsx";
+import {HeaderText} from "@/shared/components/Header/HeaderText.tsx";
+import {Description} from "@/shared/components/Description/Description.tsx";
+import {TotalCost} from "@/shared/components/TotalCost/TotalCost.tsx";
+import {Statuses} from "@/shared/components/Statuses/Statuses.tsx";
+import {Products} from "@/shared/components/Products/Products.tsx";
+import {ImagesDuringDelivery} from "@/shared/components/ImagesDuringDelivery/ImagesDuringDelivery.tsx";
+import {ArrowBackBlock} from "@/shared/components/ArrowBackBlock/ArrowBackBlock.tsx";
+
+import {useStore} from "../context/StoreContext.tsx";
+import {mockOrder} from "@/shared/api/mock.ts";
 
 export const Order = () => {
-    const {order, setOrder} = useStore();
+    const {setOrder} = useStore();
+    const order = mockOrder
+
+
     const {trackId} = useParams();
-    const [statusOpen, setToggleStatus] = useState<boolean>(false);
     const [images, setImages] = useState<FetchOrderImagesResponse>();
     const [isLoadingOrder, setIsLoading] = useState<boolean>(false);
     const notify = (e: string) => toast.error(e);
@@ -77,120 +86,20 @@ export const Order = () => {
 
     return (
         <>
-            <header className="max-w-4xl px-6 py-4 border border-transparent">
-                <NavLink to="/">
-                    <Arrow/>
-                </NavLink>
+            <header className="flex items-center max-w-4xl px-6 py-4 border border-transparent">
+                <ArrowBackBlock/>
+                <div className="shrink-0 flex justify-center items-center">
+                    <Logo></Logo>
+                </div>
             </header>
             <main className="p-4">
-                <p className="text-2xl font-medium mb-4">{order.customer}</p>
-                <h2 className="text-4xl font-bold mb-2">{trackId}</h2>
-                {order.description ?
-                    (
-                        <p className="text-secondary-text dark:text-secondary-text-dark mb-4">
-                            {order.description}
-                        </p>
-                    ) :
-                    null
-                }
-
-                <Accordion
-                    className="mb-6"
-                    title={order.statuses.currentStatus}
-                    open={statusOpen}
-                    onToggle={() => setToggleStatus((prevState) => !prevState)}
-                >
-                    <ul className="list-disc pl-6">
-                        {order.statuses.historyStatuses.map((status, idx) => {
-                            const date = new Date(status.date);
-
-                            return (
-                                <li key={idx} className="mb-2">
-                                    <p className="font-medium text-primary-text dark:text-primary-text-dark">
-                                        {status.status}
-                                    </p>
-                                    <span>{date.toLocaleDateString()}</span>
-                                    {" - "}
-                                    <span>{date.toLocaleTimeString()}</span>
-                                </li>
-                            );
-                        })}
-                    </ul>
-                </Accordion>
-
-                <p className="text-2xl font-medium mb-4">
-                    Общая стоимость: {order.totalValue} руб
-                </p>
-
-                {order.products?.map((product) => (
-                    <div key={product.id} className="mb-6 flex flex-row">
-                        <Dialog
-                            classNameTrigger="shrink-0"
-                            trigger={
-                                <ProductAvatar
-                                    className="mr-4"
-                                    url={
-                                        images?.find((image) => image.id === product.id)?.imageBase64
-                                    }
-                                />
-                            }
-                            content={
-                                <img
-                                    src={
-                                        images?.find((image) => image.id === product.id)?.imageBase64
-                                    }
-                                    alt="product"
-                                />
-                            }
-                        />
-
-                        <div className="">
-                            <p className="pt-3 mb-1 text-xl font-medium">{product.label}</p>
-                            <p className="mb-1 font-medium text-secondary-text dark:text-secondary-text-dark">
-                                {product.count} шт
-                            </p>
-                            <p className="mb-1 font-medium text-secondary-text dark:text-secondary-text-dark">
-                                {product.price} руб/шт
-                            </p>
-                        </div>
-                    </div>
-                ))}
-                {images?.find((image) => image.id === 0) ? (
-                        <>
-                            <p className="text-2xl font-medium mb-4 ">Фотографии заказа</p>
-                            <div className="flex flex-row flex-wrap">
-                                {images?.map(
-                                    (image) =>
-                                        image.id === 0 && (
-                                            <Dialog
-                                                trigger={
-                                                    <ProductAvatar className="mr-4 mb-4" url={image.imageBase64}/>
-                                                }
-                                                content={
-                                                    <img
-                                                        src={image.imageBase64}
-                                                        alt="product"
-                                                        className={"w-full h-full"}
-                                                    />
-                                                }
-                                            />
-                                        )
-                                )}
-                            </div>
-                        </>
-                    ) :
-                    <>
-                        {images ? null : <>
-                            <div className="mb-4 bg-gray dark:bg-gray-dark rounded-3xl w-55 h-6 animate-pulse"></div>
-                            <div className="flex flex-row flex-wrap">
-                                <div
-                                    className="mr-4 mb-4 bg-gray dark:bg-gray-dark rounded-3xl w-28 h-28 animate-pulse"></div>
-                                <div
-                                    className="mr-4 mb-4 bg-gray dark:bg-gray-dark rounded-3xl w-28 h-28 animate-pulse"></div>
-                            </div>
-                        </>}
-                    </>
-                }
+                <Customer name={order.customer}/>
+                <HeaderText tag={'h2'} className="mb-2">{trackId}</HeaderText>
+                <Description>{order.description}</Description>
+                <Statuses statuses={order.statuses.historyStatuses} currentStatus={order.statuses.currentStatus}/>
+                <TotalCost>{order.totalValue}</TotalCost>
+                <Products products={order.products} images={images}/>
+                <ImagesDuringDelivery images={images}/>
             </main>
         </>
     );
