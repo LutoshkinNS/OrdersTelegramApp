@@ -1,10 +1,7 @@
-interface TelegramWebApp {
-  WebApp: {
-    ready: () => void;
-    colorScheme: 'light' | 'dark';
-  }
-}
+import {Telegram} from "@twa-dev/types";
 
-interface Window {
-  Telegram: TelegramWebApp;
-} 
+declare global {
+    interface Window {
+        Telegram: Telegram;
+    }
+}
