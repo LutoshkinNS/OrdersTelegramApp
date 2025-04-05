@@ -1,20 +1,20 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Авторизация успешна</title>
-</head>
-<body>
-<h1>Авторизация успешна!</h1>
-<p>Вы можете закрыть это окно.</p>
-<script>
-    // Отправляем сообщение родительскому окну, что авторизация успешна
-    if (window.opener) {
+  </head>
+  <body>
+    <h1>Авторизация успешна!</h1>
+    <p>Вы можете закрыть это окно.</p>
+    <script>
+      // Отправляем сообщение родительскому окну, что авторизация успешна
+      if (window.opener) {
         window.opener.postMessage({ authorized: true }, "*");
-    }
-    setTimeout(() => {
+      }
+      setTimeout(() => {
         window.close();
-    }, 3000);
-</script>
-</body>
+      }, 3000);
+    </script>
+  </body>
 </html>

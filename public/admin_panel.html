@@ -1,32 +1,40 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Настройка OAuth</title>
-</head>
-<body>
-<h1>Настройка OAuth</h1>
-<div id="authIndicator" style="width:20px;height:20px;border-radius:50%;background-color:red;"></div>
-<form action="/admin/auth" method="post">
-    <label>CLIENT_ID: <input type="text" name="client_id" /></label><br/>
-    <label>SECRET_ID: <input type="text" name="secret_id" /></label><br/>
-    <label>DOMAIN: <input type="text" name="domain" /></label><br/>
-    <button type="submit">Авторизоваться</button>
-</form>
-<script>
-    // Обработчик сообщения от pop-up окна
-    window.addEventListener("message", function(event) {
+  </head>
+  <body>
+    <h1>Настройка OAuth</h1>
+    <div
+      id="authIndicator"
+      style="
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background-color: red;
+      "
+    ></div>
+    <form action="/admin/auth" method="post">
+      <label>CLIENT_ID: <input type="text" name="client_id" /></label><br />
+      <label>SECRET_ID: <input type="text" name="secret_id" /></label><br />
+      <label>DOMAIN: <input type="text" name="domain" /></label><br />
+      <button type="submit">Авторизоваться</button>
+    </form>
+    <script>
+      // Обработчик сообщения от pop-up окна
+      window.addEventListener("message", function (event) {
         // Для безопасности можно проверить event.origin, если нужно
         if (event.data && event.data.authorized === true) {
-            // Изменяем индикатор на зеленый
-            const indicator = document.getElementById("authIndicator");
-            indicator.style.backgroundColor = "green";
-            indicator.textContent = "Авторизация успешна!";
+          // Изменяем индикатор на зеленый
+          const indicator = document.getElementById("authIndicator");
+          indicator.style.backgroundColor = "green";
+          indicator.textContent = "Авторизация успешна!";
 
-            // Также можно выполнить перенаправление или вызвать функцию обновления страницы
-            // Например, window.location.href = '/admin/dashboard';
+          // Также можно выполнить перенаправление или вызвать функцию обновления страницы
+          // Например, window.location.href = '/admin/dashboard';
         }
-    });
-</script>
-</body>
+      });
+    </script>
+  </body>
 </html>

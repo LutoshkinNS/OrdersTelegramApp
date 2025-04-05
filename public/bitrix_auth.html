@@ -1,26 +1,26 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>OAuth Авторизация</title>
     <script>
-        function openAuth() {
-            // Формируем URL авторизации из данных на сервере
-            // URL генерируется сервером через oauthConfig.AuthCodeURL()
-            // Здесь, для примера, будем запрашивать /status, но на практике нужно передать URL авторизации.
-            const authUrl = "{{.AuthURL}}";
-            // Если URL не передается из сервера, можно сгенерировать его через AJAX к серверу, если это нужно.
-            // Открываем pop-up окно
-            console.log(authUrl);
-            window.open(authUrl, 'oauth', 'width=600,height=600');
-        }
-        window.onload = function() {
-            openAuth();
-        }
+      function openAuth() {
+        // Формируем URL авторизации из данных на сервере
+        // URL генерируется сервером через oauthConfig.AuthCodeURL()
+        // Здесь, для примера, будем запрашивать /status, но на практике нужно передать URL авторизации.
+        const authUrl = "{{.AuthURL}}";
+        // Если URL не передается из сервера, можно сгенерировать его через AJAX к серверу, если это нужно.
+        // Открываем pop-up окно
+        console.log(authUrl);
+        window.open(authUrl, "oauth", "width=600,height=600");
+      }
+      window.onload = function () {
+        openAuth();
+      };
     </script>
-</head>
-<body>
-<h1>Пожалуйста, пройдите авторизацию в открывшемся окне</h1>
-<p>После успешной авторизации это окно закроется автоматически.</p>
-</body>
+  </head>
+  <body>
+    <h1>Пожалуйста, пройдите авторизацию в открывшемся окне</h1>
+    <p>После успешной авторизации это окно закроется автоматически.</p>
+  </body>
 </html>

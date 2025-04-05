@@ -3,18 +3,18 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-    --font-display: "Onest", serif;
-    --color-gray: #F5F5F5;
-    --color-gray-dark: var(--tg-theme-secondary-bg-color);
-    --color-primary-text: #27272A;
-    --color-primary-text-dark: #FFFFFF;
-    --color-secondary-text: var(--color-gray-700);
-    --color-secondary-text-dark: var(--tg-theme-hint-color);
-    --color-button-text: #FFFFFF;
-    --color-primary: #F35D00;
-    --color-bg: var(--tg-theme-bg-color, white);
+  --font-display: "Onest", serif;
+  --color-gray: #f5f5f5;
+  --color-gray-dark: var(--tg-theme-secondary-bg-color);
+  --color-primary-text: #27272a;
+  --color-primary-text-dark: #ffffff;
+  --color-secondary-text: var(--color-gray-700);
+  --color-secondary-text-dark: var(--tg-theme-hint-color);
+  --color-button-text: #ffffff;
+  --color-primary: #f35d00;
+  --color-bg: var(--tg-theme-bg-color, white);
 }
 
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
