@@ -6,6 +6,7 @@ import {Button} from "@/shared/components/Button/Button.tsx";
 import {fetchOrder, OrderType} from "@/shared/api/fetchOrder.ts";
 import {fetchOrders, OrdersListType} from "@/shared/api/fetchOrders.ts";
 import {FindedOrders} from "@/shared/components/FindedOrders/FindedOrders.tsx";
+import {OrdersListState} from "@/shared/components/OrdersListState/OrdersListState.tsx";
 
 type MainProps = {
     setOrder: (order: OrderType) => void;
@@ -27,7 +28,7 @@ export default function Main(props: MainProps) {
         const getOrders = async () => {
             setIsOrdersLoading(true);
             const orders = await fetchOrders(tgUserId);
-            setOrdersList(orders);
+            setOrdersList([{track_number: 'АТ0758', status: 'На складе'}, ...orders]);
             setIsOrdersLoading(false);
         };
         getOrders();
@@ -96,26 +97,16 @@ export default function Main(props: MainProps) {
                 {/*</p>*/}
             </div>
             <div className="flex items-center justify-center">
-                {isOrdersLoading ? (
-                    <ul className="flex flex-col gap-2 w-full">
-                        {[1, 2].map((i) => (
-                            <li key={i} className="animate-pulse">
-                                <div className="w-full h-[88px] bg-gray-200 dark:bg-gray-700 rounded-xl"/>
-                            </li>
-                        ))}
-                    </ul>
-                ) : ordersList ? (
+                <OrdersListState
+                    isOrdersLoading={isOrdersLoading}
+                    ordersList={ordersList}
+                />
+                {ordersList && (
                     <FindedOrders
                         ordersList={ordersList}
                         onClick={handleOrderClick}
                         isOrderLoading={isOrderLoading}
                     />
-                ) : (
-                    <div className="h-52 flex items-center justify-center">
-                        <p className="text-primary-text dark:text-primary-text-dark">
-                            У вас нет заказов
-                        </p>
-                    </div>
                 )}
             </div>
         </div>
