@@ -12,6 +12,8 @@ import {OrderType} from "@/shared/api/fetchOrder.ts";
 import "./shared/styles/index.css";
 
 export const tg = window.Telegram.WebApp;
+// const tgUserId = tg.initDataUnsafe.user.id;
+const tgUserId = 429661887;
 
 export const App = () => {
     const [order, setOrder] = useState<OrderType | null>(null);
@@ -22,13 +24,16 @@ export const App = () => {
 
     return (
         <BrowserRouter>
-            <ErrorBoundary fallback={<Error/>} onReset={() => {
-                setOrder(null);
-            }}>
+            <ErrorBoundary
+                fallback={<Error/>}
+                onReset={() => {
+                    setOrder(null);
+                }}
+            >
                 <StoreProvider value={{order, setOrder}}>
                     <Routes>
                         <Route element={<Layout themeMode={tg.colorScheme}/>}>
-                            <Route path="/" element={<Main setOrder={setOrder}/>}/>
+                            <Route path="/" element={<Main setOrder={setOrder} tgUserId={tgUserId}/>}/>
                             <Route path="/order/:trackId" element={<Order/>}/>
                             <Route path="/error" element={<Error/>}/>
                         </Route>
@@ -36,6 +41,5 @@ export const App = () => {
                 </StoreProvider>
             </ErrorBoundary>
         </BrowserRouter>
-
     );
 };

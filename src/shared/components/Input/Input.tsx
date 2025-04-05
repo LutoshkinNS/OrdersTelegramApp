@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import {Input as InputBase} from '@base-ui-components/react/input';
+import {Input as InputBase} from "@base-ui-components/react/input";
 
 export type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
     className?: string;

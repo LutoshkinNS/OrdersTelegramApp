@@ -10,7 +10,7 @@ export function Button(props: ButtonProps) {
     const {children, className, disabled, ...otherProps} = props;
 
     const classes = twMerge(
-        "w-full px-5 py-4 bg-primary text-button-text font-medium rounded-xl cursor-pointer",
+        "px-5 py-4 bg-primary text-button-text font-medium rounded-xl cursor-pointer",
         "active:bg-orange-700",
         disabled ? "opacity-50 cursor-not-allowed hover:bg-primary" : "",
         className
