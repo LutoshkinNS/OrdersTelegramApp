@@ -6,14 +6,15 @@ import { useState } from "react";
 export type StatusesProps = {
   currentStatus: StatusesType["currentStatus"];
   statuses: StatusesType["historyStatuses"];
+  className?: string;
 };
 
-export const Statuses = ({ currentStatus, statuses }: StatusesProps) => {
+export const Statuses = ({ currentStatus, statuses, className }: StatusesProps) => {
   const [statusOpen, setToggleStatus] = useState<boolean>(false);
 
   return (
     <Accordion
-      className="mb-6"
+      className={className}
       title={currentStatus}
       open={statusOpen}
       onToggle={() => setToggleStatus((prevState) => !prevState)}

@@ -1,7 +1,7 @@
 type CustomerProps = {
-  name: string;
+  name?: string;
 };
 
 export const Customer = ({ name }: CustomerProps) => {
-  return <p className="text-2xl font-medium mb-4">{name}</p>;
+  return name ? <p className="text-2xl font-medium mb-4">{name}</p> : null;
 };

@@ -20,6 +20,8 @@ export interface StatusesType {
 export interface OrderType {
   trackNumber: string;
   customer?: string;
+  deliveryToCustomer?: string;
+  deliveryChinaToRF?: number;
   totalValue: number;
   products?: Array<ProductType>;
   description?: string | null;
@@ -36,14 +38,14 @@ export const fetchOrder = async (trackNumber: string): Promise<OrderType> => {
     const response = await fetch(
       `${import.meta.env.DEV ? DEV_API_URL : ""}/api/order?trackNumber=${trackNumber}`,
       {
-        method: "GET",
+        method: "GET"
         // headers: {
         //     'Accept': 'application/json',
         //     'Content-Type': 'application/json',
         // },
         // mode: 'cors',
         // credentials: 'include'
-      },
+      }
     );
 
     if (!response.ok) {

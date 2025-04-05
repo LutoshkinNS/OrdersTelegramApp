@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 
 import {
   fetchOrderImages,
-  FetchOrderImagesResponse,
+  FetchOrderImagesResponse
 } from "@/shared/api/fetchOrderImages.ts";
 import { fetchOrder } from "@/shared/api/fetchOrder.ts";
 import { Customer } from "@/shared/components/Customer/Customer.tsx";
@@ -16,11 +16,11 @@ import { Products } from "@/shared/components/Products/Products.tsx";
 import { ImagesDuringDelivery } from "@/shared/components/ImagesDuringDelivery/ImagesDuringDelivery.tsx";
 
 import { useStore } from "../context/StoreContext.tsx";
-import { mockOrder } from "@/shared/api/mock.ts";
+import { DeliveryToCustomer } from "@/shared/components/DeliveryToCustomer/DeliveryToCustomer.tsx";
+import { DeliveryCinaToRf } from "@/shared/components/DeliveryCinaToRf/DeliveryCinaToRf.tsx";
 
 export const Order = () => {
-  const { setOrder } = useStore();
-  const order = mockOrder;
+  const { order, setOrder } = useStore();
 
   const { trackId } = useParams();
   const [images, setImages] = useState<FetchOrderImagesResponse>();
@@ -63,7 +63,7 @@ export const Order = () => {
           trackNumber: trackId,
           // width: 112,
           // height: 112,
-          quality: 80,
+          quality: 80
         });
 
         console.log("fetchImages", images);
@@ -83,15 +83,22 @@ export const Order = () => {
 
   return (
     <div className="p-4">
-      <Customer name={order.customer} />
-      <HeaderText tag={"h2"} className="mb-2">
-        {trackId}
-      </HeaderText>
-      <Description>{order.description}</Description>
-      <Statuses
-        statuses={order.statuses.historyStatuses}
-        currentStatus={order.statuses.currentStatus}
-      />
+      <div className="mb-4">
+        <Customer name={order.customer} />
+        <HeaderText tag={"h2"} className="mb-2">
+          {trackId}
+        </HeaderText>
+        <Description>{order.description}</Description>
+      </div>
+      <div className="mb-6">
+        <Statuses
+          statuses={order.statuses.historyStatuses}
+          currentStatus={order.statuses.currentStatus}
+          className="mb-2"
+        />
+        <DeliveryToCustomer date={order.deliveryToCustomer} className="mb-2" />
+        <DeliveryCinaToRf days={order.deliveryChinaToRF} />
+      </div>
       <TotalCost>{order.totalValue}</TotalCost>
       <Products products={order.products} images={images} />
       <ImagesDuringDelivery images={images} />
