@@ -2,16 +2,14 @@ import { OrdersListState } from "@/shared/components/OrdersListState/OrdersListS
 import { FindedOrders } from "@/shared/components/FindedOrders/FindedOrders.tsx";
 import { useEffect, useState } from "react";
 import { fetchOrders, OrdersListType } from "@/shared/api/fetchOrders.ts";
-import { fetchOrder } from "@/shared/api/fetchOrder.ts";
 import { useStore } from "@/context/StoreContext.tsx";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 
 export const CustomerOrdersList = () => {
-  const [isOrderLoading, setIsOrderLoading] = useState<boolean>(false);
   const [ordersList, setOrdersList] = useState<OrdersListType>();
   const [isOrdersLoading, setIsOrdersLoading] = useState<boolean>(true);
-  const { tgUserId, setOrder } = useStore();
+  const { tgUserId } = useStore();
   const navigate = useNavigate();
   const notify = (e: string) => toast.error(e);
 
@@ -36,17 +34,7 @@ export const CustomerOrdersList = () => {
   }, [tgUserId]);
 
   const handleOrderClick = async (trackNumber: string) => {
-    try {
-      setIsOrderLoading(true);
-      const order = await fetchOrder(trackNumber);
-      setOrder(order);
-      navigate(`/order/${trackNumber}`);
-    } catch (error) {
-      console.error("Error fetching order:", error);
-      notify(error instanceof Error ? error.message : "Произошла ошибка");
-    } finally {
-      setIsOrderLoading(false);
-    }
+    navigate(`/order/${trackNumber}`);
   };
 
   return (
@@ -59,11 +47,7 @@ export const CustomerOrdersList = () => {
         ordersList={ordersList}
       />
       {ordersList && (
-        <FindedOrders
-          ordersList={ordersList}
-          onClick={handleOrderClick}
-          isOrderLoading={isOrderLoading}
-        />
+        <FindedOrders ordersList={ordersList} onClick={handleOrderClick} />
       )}
     </div>
   );
