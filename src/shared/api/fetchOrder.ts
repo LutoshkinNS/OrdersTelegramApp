@@ -9,7 +9,7 @@ export interface ProductType {
 
 export interface StatusType {
   status: string;
-  date: string;
+  date?: string;
 }
 
 export interface StatusesType {
@@ -38,14 +38,14 @@ export const fetchOrder = async (trackNumber: string): Promise<OrderType> => {
     const response = await fetch(
       `${import.meta.env.DEV ? DEV_API_URL : ""}/api/order?trackNumber=${trackNumber}`,
       {
-        method: "GET"
+        method: "GET",
         // headers: {
         //     'Accept': 'application/json',
         //     'Content-Type': 'application/json',
         // },
         // mode: 'cors',
         // credentials: 'include'
-      }
+      },
     );
 
     if (!response.ok) {

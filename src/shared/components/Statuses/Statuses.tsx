@@ -9,7 +9,11 @@ export type StatusesProps = {
   className?: string;
 };
 
-export const Statuses = ({ currentStatus, statuses, className }: StatusesProps) => {
+export const Statuses = ({
+  currentStatus,
+  statuses,
+  className,
+}: StatusesProps) => {
   const [statusOpen, setToggleStatus] = useState<boolean>(false);
 
   return (
@@ -19,7 +23,7 @@ export const Statuses = ({ currentStatus, statuses, className }: StatusesProps) 
       open={statusOpen}
       onToggle={() => setToggleStatus((prevState) => !prevState)}
     >
-      <StatusesList statuses={statuses} />
+      <StatusesList statuses={statuses} currentStatus={currentStatus} />
     </Accordion>
   );
 };

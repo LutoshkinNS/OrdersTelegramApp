@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 
 import {
   fetchOrderImages,
-  FetchOrderImagesResponse
+  FetchOrderImagesResponse,
 } from "@/shared/api/fetchOrderImages.ts";
 import { fetchOrder } from "@/shared/api/fetchOrder.ts";
 import { Customer } from "@/shared/components/Customer/Customer.tsx";
@@ -63,7 +63,7 @@ export const Order = () => {
           trackNumber: trackId,
           // width: 112,
           // height: 112,
-          quality: 80
+          quality: 80,
         });
 
         console.log("fetchImages", images);
@@ -85,7 +85,7 @@ export const Order = () => {
     <div className="p-4">
       <div className="mb-4">
         <Customer name={order.customer} />
-        <HeaderText tag={"h2"} className="mb-2">
+        <HeaderText tag={"h2"} className="mb-2 text-primary">
           {trackId}
         </HeaderText>
         <Description>{order.description}</Description>

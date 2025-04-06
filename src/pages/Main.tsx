@@ -1,41 +1,19 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
 import { Input } from "@/shared/components/Input/Input.tsx";
 import { Button } from "@/shared/components/Button/Button.tsx";
-import { fetchOrder, OrderType } from "@/shared/api/fetchOrder.ts";
-import { fetchOrders, OrdersListType } from "@/shared/api/fetchOrders.ts";
-import { FindedOrders } from "@/shared/components/FindedOrders/FindedOrders.tsx";
-import { OrdersListState } from "@/shared/components/OrdersListState/OrdersListState.tsx";
+import { fetchOrder } from "@/shared/api/fetchOrder.ts";
+import { CustomerOrdersList } from "@/shared/components/CustomerOrdersList/CustomerOrdersList.tsx";
+import { useStore } from "@/context/StoreContext.tsx";
 
-type MainProps = {
-  setOrder: (order: OrderType) => void;
-  tgUserId: number;
-};
-
-export default function Main(props: MainProps) {
-  const { setOrder, tgUserId } = props;
+export default function Main() {
   const [inputValue, setInputValue] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [isOrderLoading, setIsOrderLoading] = useState<boolean>(false);
-  const [ordersList, setOrdersList] = useState<OrdersListType>();
-  const [isOrdersLoading, setIsOrdersLoading] = useState<boolean>(true);
+  const { setOrder } = useStore();
 
   const navigate = useNavigate();
   const notify = (e: string) => toast.error(e);
-
-  useEffect(() => {
-    const getOrders = async () => {
-      setIsOrdersLoading(true);
-      const orders = await fetchOrders(tgUserId);
-      setOrdersList([
-        { track_number: "АТ0758", status: "На складе" },
-        ...orders,
-      ]);
-      setIsOrdersLoading(false);
-    };
-    getOrders();
-  }, [tgUserId]);
 
   const handleSubmit = async () => {
     if (inputValue !== "") {
@@ -56,20 +34,6 @@ export default function Main(props: MainProps) {
       } finally {
         setIsLoading(false);
       }
-    }
-  };
-
-  const handleOrderClick = async (trackNumber: string) => {
-    try {
-      setIsOrderLoading(true);
-      const order = await fetchOrder(trackNumber);
-      setOrder(order);
-      navigate(`/order/${trackNumber}`);
-    } catch (error) {
-      console.error("Error fetching order:", error);
-      notify(error instanceof Error ? error.message : "Произошла ошибка");
-    } finally {
-      setIsOrderLoading(false);
     }
   };
 
@@ -99,19 +63,7 @@ export default function Main(props: MainProps) {
         {/*    политикой конфиденциальности*/}
         {/*</p>*/}
       </div>
-      <div className="flex items-center justify-center">
-        <OrdersListState
-          isOrdersLoading={isOrdersLoading}
-          ordersList={ordersList}
-        />
-        {ordersList && (
-          <FindedOrders
-            ordersList={ordersList}
-            onClick={handleOrderClick}
-            isOrderLoading={isOrderLoading}
-          />
-        )}
-      </div>
+      <CustomerOrdersList />
     </div>
   );
 }

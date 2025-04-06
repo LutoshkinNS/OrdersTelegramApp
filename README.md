@@ -9,7 +9,7 @@
 ### TODO
 
 - [x] Add fonts
-  - [x] check colors for fonts
+    - [x] check colors for fonts
 - [x] Add loaders or skeletons
 - [x] Check telegram dark mode
 - [x] Add max width to container
@@ -28,3 +28,4 @@
 - [x] Add logo to order page
 - [x] Fix blur
 - [ ] Block dialog if images not loaded
+- [ ] Статусы заказов снизу вверх?

@@ -13,10 +13,12 @@ import "./shared/styles/index.css";
 
 export const tg = window.Telegram.WebApp;
 // const tgUserId = tg.initDataUnsafe.user.id;
+// TODO удалить захардкоженый id
 const tgUserId = 429661887;
 
 export const App = () => {
   const [order, setOrder] = useState<OrderType | null>(null);
+  console.log("=>(App.tsx:20) order", order);
 
   useEffect(() => {
     tg.ready();
@@ -30,13 +32,10 @@ export const App = () => {
           setOrder(null);
         }}
       >
-        <StoreProvider value={{ order, setOrder }}>
+        <StoreProvider value={{ order, setOrder, tgUserId }}>
           <Routes>
             <Route element={<Layout themeMode={tg.colorScheme} />}>
-              <Route
-                path="/"
-                element={<Main setOrder={setOrder} tgUserId={tgUserId} />}
-              />
+              <Route path="/" element={<Main />} />
               <Route path="/order/:trackId" element={<Order />} />
               <Route path="/error" element={<Error />} />
             </Route>

@@ -16,9 +16,10 @@ export const OrdersListState = ({
 
   if (!ordersList) {
     return (
-      <div className="h-52 flex items-center justify-center">
-        <p className="text-primary-text dark:text-primary-text-dark">
-          У вас нет заказов
+      <div className="h-40 flex items-center justify-center">
+        <p className="text-primary-text dark:text-primary-text-dark text-center">
+          Автоматический поиск заказов по вашему номеру телефона не дал
+          результатов. Попробуйте воспользоваться поиском по номеру заказа.
         </p>
       </div>
     );

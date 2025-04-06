@@ -4,6 +4,7 @@ import { OrderType } from "@/shared/api/fetchOrder.ts";
 interface StoreContextType {
   order: OrderType | null;
   setOrder: (order: OrderType | null) => void;
+  tgUserId: number | null;
 }
 
 const StoreContext = createContext<StoreContextType | null>(null);
