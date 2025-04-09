@@ -5,7 +5,9 @@ export const ArrowToMainBlock = () => {
   return (
     <nav className="absolute">
       <NavLink to="/">
-        <Arrow />
+        <div className="w-10 h-10 flex items-center justify-center">
+          <Arrow />
+        </div>
       </NavLink>
     </nav>
   );

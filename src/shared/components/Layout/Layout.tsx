@@ -1,4 +1,4 @@
-import { Outlet, useLocation } from "react-router";
+import { NavLink, Outlet, useLocation } from "react-router";
 import clsx from "clsx";
 import { ToastContainer } from "react-toastify";
 import { ArrowToMainBlock } from "@/shared/components/ArrowBackBlock/ArrowBackBlock";
@@ -22,7 +22,9 @@ export const Layout = ({ themeMode }: LayoutProps) => {
       <header className="flex items-center px-6 py-4 border border-transparent relative">
         {!isMainPage && <ArrowToMainBlock />}
         <div className="grow-1 flex justify-center items-center">
-          <Logo />
+          <NavLink to="/">
+            <Logo />
+          </NavLink>
         </div>
       </header>
       <main>
