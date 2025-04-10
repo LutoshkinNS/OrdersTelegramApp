@@ -2,7 +2,7 @@ import { useParams } from "react-router";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
-import { fetchOrder } from "@/shared/api/fetchOrder.ts";
+import { fetchOrder, OrderType } from "@/shared/api/fetchOrder.ts";
 import { Customer } from "@/shared/components/Customer/Customer.tsx";
 import { HeaderText } from "@/shared/components/Header/HeaderText.tsx";
 import { Description } from "@/shared/components/Description/Description.tsx";
@@ -13,16 +13,14 @@ import { ImagesDuringDelivery } from "@/shared/components/ImagesDuringDelivery/I
 import { OrderSkeleton } from "@/shared/components/OrderSkeleton/OrderSkeleton.tsx";
 import { useOrderImages } from "@/shared/hooks/useOrderImages.ts";
 
-import { useStore } from "../context/StoreContext.tsx";
 import { DeliveryToCustomer } from "@/shared/components/DeliveryToCustomer/DeliveryToCustomer.tsx";
 import { DeliveryCinaToRf } from "@/shared/components/DeliveryCinaToRf/DeliveryCinaToRf.tsx";
 
 export const Order = () => {
+  const [order, setOrder] = useState<OrderType>();
   const { trackId } = useParams();
-  const { order, setOrder } = useStore();
   const [isLoading, setIsLoading] = useState(false);
-  const { images: orderImages, isLoading: isImagesLoading } =
-    useOrderImages(trackId);
+  const { images: orderImages } = useOrderImages(trackId);
   const notify = (e: string) => toast.error(e);
 
   useEffect(() => {

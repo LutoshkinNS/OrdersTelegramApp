@@ -1,9 +1,9 @@
-import { OrdersListType } from "@/shared/api/fetchOrders.ts";
 import { OrdersSkeleton } from "@/shared/components/OrdersSkeleton/OrdersSkeleton.tsx";
+import { OrdersListType } from "@/shared/api/types.ts";
 
 type OrdersListStateProps = {
   isOrdersLoading: boolean;
-  ordersList?: OrdersListType;
+  ordersList: OrdersListType;
 };
 
 export const OrdersListState = ({
@@ -14,7 +14,7 @@ export const OrdersListState = ({
     return <OrdersSkeleton />;
   }
 
-  if (!ordersList) {
+  if (ordersList.length === 0) {
     return (
       <div className="h-40 flex items-center justify-center">
         <p className="text-primary-text dark:text-primary-text-dark text-center">

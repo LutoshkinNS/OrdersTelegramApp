@@ -1,18 +1,20 @@
 import { DEV_API_URL } from "./config.ts";
+import { OrdersListType } from "@/shared/api/types.ts";
 
-export interface OrderItemType {
-  track_number: string;
-  status: string;
-}
-
-export type OrdersListType = Array<OrderItemType>;
-
-export const fetchOrders = async (tgId: number): Promise<OrdersListType> => {
+export const fetchOrdersByTrackNumber = async (
+  trackNumber: string,
+): Promise<OrdersListType> => {
   const response = await fetch(
-    `${import.meta.env.DEV ? DEV_API_URL : ""}/api/orders?tgId=${tgId}`,
+    `${import.meta.env.DEV ? DEV_API_URL : ""}/api/orders?trackNumber=${trackNumber}`,
   );
 
   if (!response.ok) {
+    // FIXME избавиться
+    if (response.status === 400) {
+      throw new Error(
+        'Некорректный формат номера заказа. Номер заказа: "АТ" и минимум 4 цифры',
+      );
+    }
     throw new Error("Непредвиденная ошибка при запросе данных");
   }
 

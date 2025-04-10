@@ -1,10 +1,7 @@
 import { createContext, useContext, ReactNode } from "react";
-import { OrderType } from "@/shared/api/fetchOrder.ts";
 
 interface StoreContextType {
-  order: OrderType | null;
-  setOrder: (order: OrderType | null) => void;
-  tgUserId: number | null;
+  tgUserId?: number;
 }
 
 const StoreContext = createContext<StoreContextType | null>(null);

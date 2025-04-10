@@ -15,7 +15,7 @@ export const Layout = ({ themeMode }: LayoutProps) => {
   return (
     <div
       className={clsx(
-        "max-w-3xl h-dvh mx-auto text-primary-text dark:text-primary-text-dark",
+        "max-w-3xl h-dvh mx-auto bg-bg text-primary-text dark:text-primary-text-dark",
         themeMode,
       )}
     >

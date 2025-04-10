@@ -1,4 +1,4 @@
-import { OrdersListType } from "@/shared/api/fetchOrders.ts";
+import { OrdersListType } from "@/shared/api/types.ts";
 
 export type FindedOrdersProps = {
   ordersList: OrdersListType;
@@ -12,7 +12,7 @@ export const FindedOrders = ({
   isOrderLoading,
 }: FindedOrdersProps) => {
   return (
-    <div className="w-full">
+    <div className="w-full mb-20">
       <ul className="flex flex-col gap-3 ">
         {ordersList.map((order) => {
           return (
@@ -22,10 +22,10 @@ export const FindedOrders = ({
                 disabled={isOrderLoading}
                 className="w-full flex items-center px-5 py-6 rounded-xl text-primary-text dark:text-primary-text-dark bg-gray dark:bg-gray-dark cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                <span className="font-bold text-xl text-primary">
+                <span className="font-bold text-xl text-primary w-24 text-left">
                   {order.track_number}
                 </span>
-                <span className="ml-4">{order.status}</span>
+                <span className="ml-4 text-left">{order.status}</span>
               </button>
             </li>
           );
