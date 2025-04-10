@@ -33,7 +33,7 @@ export const Products = ({ products, images }: ProductsProps) => {
           {product.count} шт
         </p>
         <p className="mb-1 font-medium text-secondary-text dark:text-secondary-text-dark">
-          {product.price} руб/шт
+          {product.price.toLocaleString("ru-RU")} руб/шт
         </p>
       </div>
     </div>
