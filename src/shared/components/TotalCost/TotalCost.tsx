@@ -7,7 +7,8 @@ export const TotalCost = ({ children }: TotalCostProps) => {
 
   return (
     <p className="text-2xl font-medium mb-4">
-      Общая стоимость: <span className="font-bold">{formattedNumber} ₽</span>
+      <span>Общая стоимость: </span>
+      <span className="font-bold inline-block">{formattedNumber} ₽</span>
     </p>
   );
 };
