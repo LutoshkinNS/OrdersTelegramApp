@@ -1,38 +1,81 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Input } from "@/shared/components/Input/Input.tsx";
 import { Button } from "@/shared/components/Button/Button.tsx";
 import { CustomerOrdersList } from "@/shared/components/CustomerOrdersList/CustomerOrdersList.tsx";
 import { useFetchOrdersListByTrackNumber } from "@/shared/hooks/useFetchOrdersListByTrackNumber.ts";
-import { useFetchOrdersListByTgId } from "@/shared/hooks/useFetchOrdersListByTgId.ts";
-import { OrdersListType } from "@/shared/api/types.ts";
+// import { useQuery } from "@tanstack/react-query";
+// import { OrdersListType } from "@/shared/api/types.ts";
+// import { toast } from "react-toastify";
+// import { fetchOrdersByTrackNumber } from "@/shared/api/fetchOrdersByTrackNumber.ts";
+import { useStore } from "@/context/StoreContext.tsx";
 
 export default function Main() {
-  const [inputValue, setInputValue] = useState<string>("");
+  const { orders, setOrders, inputValue, setInputValue } = useStore();
+  // const notify = (e: string) => toast.error(e);
+  // const [orders, setOrders] = useState<OrdersListType>([]);
+  // const [startSearch, setStartSearch] = useState<boolean>(false);
   const {
     orders: ordersByTrackNumber,
     startRequest: startRequestByTrackNumber,
     isLoading: isLoadingByTrackNumber,
   } = useFetchOrdersListByTrackNumber();
-  const {
-    orders: ordersByTgId,
-    startRequest: startRequestByTgId,
-    isLoading: isLoadingByTgId,
-  } = useFetchOrdersListByTgId();
-  const [orders, setOrders] = useState<OrdersListType>([]);
 
-  useEffect(() => {
-    startRequestByTgId();
-  }, []);
+  // const initialRef = useRef<boolean>(false);
 
-  useEffect(() => {
-    setOrders(ordersByTgId);
-  }, [ordersByTgId]);
+  // const {
+  //   isPending: isPendingByTrackNumber,
+  //   isError: isErrorByTrackNumber,
+  //   data: dataByTrackNumber,
+  //   error: errorByTrackNumber,
+  // } = useQuery({
+  //   queryKey: ["orderListByTrackNumber", startSearch],
+  //   queryFn: async () => {
+  //     try {
+  //       const ordersByTrackNumber = await fetchOrdersByTrackNumber(inputValue);
+  //       setOrders(ordersByTrackNumber);
+  //     } catch (error) {
+  //       console.error(error);
+  //       notify(error.message);
+  //     } finally {
+  //       setStartSearch(false);
+  //     }
+  //   },
+  //   enabled: !!inputValue && startSearch,
+  // });
+  //
+  // const {
+  //   isPending: isPendingByTgId,
+  //   isError: isErrorByTgId,
+  //   data: dataByTgId,
+  //   error: errorByTgId,
+  // } = useQuery({
+  //   queryKey: ["ordersListByTgId"],
+  //   queryFn: async () => {
+  //     try {
+  //       const ordersListByTgId = await fetchOrdersByTrackNumber(inputValue);
+  //       setOrders(ordersListByTgId);
+  //     } catch (error) {
+  //       console.error(error);
+  //       notify(error.message);
+  //     } finally {
+  //       setStartSearch(false);
+  //     }
+  //   },
+  //   enabled: !!inputValue && startSearch,
+  // });
 
   useEffect(() => {
     setOrders(ordersByTrackNumber);
   }, [ordersByTrackNumber]);
 
+  useEffect(() => {
+    if (inputValue) {
+      startRequestByTrackNumber(inputValue);
+    }
+  }, []);
+
   const handleSubmit = async () => {
+    // setStartSearch(true);
     startRequestByTrackNumber(inputValue);
   };
 
@@ -58,7 +101,7 @@ export default function Main() {
           </Button>
         </div>
       </div>
-      <CustomerOrdersList ordersList={orders} isLoading={isLoadingByTgId} />
+      <CustomerOrdersList ordersList={orders} />
       <p className="fixed bottom-0 py-4 bg-bg text-center text-secondary-text dark:text-secondary-text-dark text-sm">
         Используя приложение, вы соглашаетесь с обработкой персональных данных и
         политикой конфиденциальности

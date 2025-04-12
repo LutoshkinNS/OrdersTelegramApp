@@ -9,7 +9,6 @@ export const fetchOrdersByTrackNumber = async (
   );
 
   if (!response.ok) {
-    // FIXME избавиться
     if (response.status === 400) {
       throw new Error(
         'Некорректный формат номера заказа. Номер заказа: "АТ" и минимум 4 цифры',
