@@ -1,9 +1,9 @@
 import { DEV_API_URL } from "./config.ts";
-import { OrdersListType } from "@/shared/api/types.ts";
+import { IOrder } from "@/entities/order/model/types.ts";
 
 export const fetchOrdersByTrackNumber = async (
   trackNumber: string,
-): Promise<OrdersListType> => {
+): Promise<IOrder[]> => {
   const response = await fetch(
     `${import.meta.env.DEV ? DEV_API_URL : ""}/api/orders?trackNumber=${trackNumber}`,
   );

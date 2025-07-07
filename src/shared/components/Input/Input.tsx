@@ -6,7 +6,7 @@ export type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
 };
 
 export function Input(props: InputProps) {
-  const { className, ...otherProps } = props;
+  const { className, type = "text", inputMode = "text", ...otherProps } = props;
 
   return (
     <InputBase
@@ -15,6 +15,8 @@ export function Input(props: InputProps) {
         "focus:outline-primary",
         className,
       )}
+      type={type}
+      inputMode={inputMode}
       {...otherProps}
     />
   );

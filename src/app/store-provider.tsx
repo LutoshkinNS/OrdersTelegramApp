@@ -1,7 +1,7 @@
 import { StoreProvider as AppStoreProvider } from "../context/StoreContext.tsx";
 import { useState } from "react";
-import { OrdersListType } from "@/shared/api/types.ts";
 import { Telegram } from "@twa-dev/types";
+import { IOrder } from "@/entities/order";
 
 export function StoreProvider({
   children,
@@ -12,7 +12,7 @@ export function StoreProvider({
 }) {
   const tgUserId = tg.initDataUnsafe.user?.id;
 
-  const [orders, setOrders] = useState<OrdersListType>([]);
+  const [orders, setOrders] = useState<IOrder[]>([]);
   const [inputValue, setInputValue] = useState<string>("");
 
   return (

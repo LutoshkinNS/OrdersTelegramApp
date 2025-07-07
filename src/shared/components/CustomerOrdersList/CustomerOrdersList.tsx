@@ -1,13 +1,13 @@
 import { OrdersListState } from "@/shared/components/OrdersListState/OrdersListState.tsx";
 import { FindedOrders } from "@/shared/components/FindedOrders/FindedOrders.tsx";
 import { useNavigate } from "react-router";
-import { OrdersListType } from "@/shared/api/types.ts";
 import { useFetchOrdersListByTgId } from "@/shared/hooks/useFetchOrdersListByTgId.ts";
 import { useStore } from "@/context/StoreContext.tsx";
 import { useEffect } from "react";
+import { IOrder } from "@/entities/order";
 
 interface CustomerOrdersListProps {
-  ordersList: OrdersListType;
+  ordersList: IOrder[];
 }
 
 export const CustomerOrdersList = ({ ordersList }: CustomerOrdersListProps) => {

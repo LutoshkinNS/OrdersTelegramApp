@@ -1,10 +1,11 @@
 import { createContext, useContext, ReactNode } from "react";
 import { OrdersListType } from "@/shared/api/types.ts";
+import { IOrder } from "@/entities/order";
 
 interface StoreContextType {
   tgUserId?: number;
   orders: OrdersListType;
-  setOrders: (orders: OrdersListType) => void;
+  setOrders: (orders: IOrder[]) => void;
   inputValue: string;
   setInputValue: (value: string) => void;
 }
