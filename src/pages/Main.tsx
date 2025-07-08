@@ -1,26 +1,25 @@
-import { useEffect } from "react";
+import { useState } from "react";
 import { Input } from "@/shared/components/Input/Input.tsx";
 import { Button } from "@/shared/components/Button/Button.tsx";
-import { CustomerOrdersList } from "@/shared/components/CustomerOrdersList/CustomerOrdersList.tsx";
-import { useStore } from "@/context/StoreContext.tsx";
 import { useOrderListByTrackNumber } from "@/features/orders-list/model/useOrderListByTrackNumber.ts";
+import { OrderList } from "@/features/orders-list/ui/order-list.tsx";
+import { useOrderListByTgId } from "@/features/orders-list/model/useOrderListByTgId.ts";
 
 export default function Main() {
-  const { orders, setOrders, inputValue, setInputValue } = useStore();
+  const [inputValue, setInputValue] = useState<string>("");
 
   const {
-    data: orderList,
-    isLoading: isLoadingOrderList,
-    refetch,
+    data: orderListByTrackNumber,
+    isPending: isPendingOrderListByTrackNumber,
+    refetch: refetchByTrackNumber,
   } = useOrderListByTrackNumber(inputValue);
 
-  useEffect(() => {
-    if (orderList) setOrders(orderList);
-  }, [orderList]);
+  const { data: orderListByTgId, isPending: isPendingOrderListByTgId } =
+    useOrderListByTgId();
 
   const handleSubmit = async () => {
     if (inputValue) {
-      await refetch();
+      await refetchByTrackNumber();
     }
   };
 
@@ -38,13 +37,16 @@ export default function Main() {
           <Button
             className="text-xl"
             onClick={handleSubmit}
-            disabled={isLoadingOrderList}
+            // disabled={isPendingOrderListByTrackNumber}
           >
             Найти
           </Button>
         </div>
       </div>
-      <CustomerOrdersList ordersList={orderList} />
+      <OrderList
+        ordersList={orderListByTrackNumber || orderListByTgId || []}
+        isPending={isPendingOrderListByTrackNumber || isPendingOrderListByTgId}
+      />
       <p className="fixed bottom-0 py-4 bg-bg text-center text-secondary-text dark:text-secondary-text-dark text-sm">
         Используя приложение, вы соглашаетесь с обработкой персональных данных и
         политикой конфиденциальности

@@ -1,12 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
-import { orderListByTrackNumberQuery } from "@/entities/order";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
+import { useStore } from "@/context/StoreContext.tsx";
+import { orderListByTgIdQuery } from "@/entities/order/model/order-queries.ts";
 
-export function useOrderListByTrackNumber(trackNumber: string | undefined) {
+export function useOrderListByTgId() {
+  const { tgUserId } = useStore();
+
   const { data, isPending, refetch, error, isError } = useQuery({
-    ...orderListByTrackNumberQuery(trackNumber || ""),
-    enabled: false,
+    ...orderListByTgIdQuery(tgUserId!),
+    enabled: !!tgUserId,
   });
 
   useEffect(() => {

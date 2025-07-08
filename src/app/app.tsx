@@ -6,6 +6,7 @@ import { Error } from "@/pages/Error.tsx";
 import "../shared/styles/index.css";
 import { AppRoutes } from "./app-routes.tsx";
 import { AppProviders } from "./app-providers.tsx";
+import { BrowserRouter } from "react-router";
 
 export const tg = window.Telegram.WebApp;
 
@@ -15,10 +16,12 @@ export const App = () => {
   }, []);
 
   return (
-    <ErrorBoundary fallback={<Error />} onReset={() => {}}>
-      <AppProviders tg={tg}>
-        <AppRoutes />
-      </AppProviders>
-    </ErrorBoundary>
+    <BrowserRouter>
+      <ErrorBoundary fallback={<Error />} onReset={() => {}}>
+        <AppProviders tg={tg}>
+          <AppRoutes />
+        </AppProviders>
+      </ErrorBoundary>
+    </BrowserRouter>
   );
 };
